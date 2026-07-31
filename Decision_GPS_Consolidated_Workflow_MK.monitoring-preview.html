@@ -4998,7 +4998,7 @@ button.mon-metric .go{display:flex;align-items:center;gap:5px;margin-top:9px;
   padding:6px 12px;font-size:11.5px;background:transparent;color:#9a9a9a;cursor:pointer}
 .mon-seg button.on{background:var(--acc);color:#191919;font-weight:600}
 .mon-seg button svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.9}
-.mon-tools{display:flex;align-items:flex-end;gap:22px;flex-wrap:wrap;margin-bottom:18px}
+.mon-tools{display:none;align-items:flex-end;gap:22px;flex-wrap:wrap;margin-bottom:18px}
 .mon-tools .lb{font-size:9.5px;letter-spacing:.9px;text-transform:uppercase;
   color:var(--mon-dim);font-weight:600;display:block;margin-bottom:7px}
 
@@ -5292,6 +5292,69 @@ button.mon-metric .go{display:flex;align-items:center;gap:5px;margin-top:9px;
   .mon-match .g{grid-template-columns:46px minmax(0,1fr)}
   .mon-attach{grid-column:1/-1}
 }
+
+/* ── Signals / Assessed alerts / Position tracking / Portfolio tracking ── */
+.sig-card{border:1px solid var(--mon-line);border-radius:10px;background:var(--mon-tile);padding:16px 18px;margin-bottom:14px}
+.sig-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.sig-head b.id{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:var(--mon-mut)}
+.sig-head .title{font-size:14px;font-weight:600;color:var(--ink)}
+.sig-head .sp{flex:1}
+.sig-body{display:grid;grid-template-columns:1.4fr 1fr;gap:18px;align-items:center}
+.sig-meta{font-size:12px;color:#b8b8b8;line-height:1.7}
+.sig-meta .lbl{color:#7d7d7d}
+.sig-chart{background:#171717;border:1px solid #2c2c2c;border-radius:8px;padding:10px}
+.sig-acts{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;align-items:center}
+.btn-sm{border:0;border-radius:7px;padding:8px 13px;font-size:12px;font-weight:600;cursor:pointer}
+.btn-sm.pri{background:var(--acc);color:#fff}
+.btn-sm.pri:hover{background:#b08476}
+.btn-sm.gh{background:none;border:1px solid #3a3a3a;color:#c8c8c8}
+.btn-sm.gh:hover{border-color:#5a5a5a;color:#fff}
+.sig-state{font-size:11px;color:var(--mon-mut);margin-left:auto}
+.sig-interpret{margin-top:12px;padding-top:12px;border-top:1px solid #282828}
+.sig-interpret textarea{width:100%;min-height:64px;background:#1c1c1c;border:1px solid #3a3a3a;color:#eee;
+  border-radius:7px;padding:10px;resize:vertical;font:inherit;font-size:12.5px}
+@media(max-width:900px){.sig-body{grid-template-columns:1fr}}
+
+.aa-table{width:100%;border-collapse:collapse;font-size:12.5px}
+.aa-table th{text-align:left;font-weight:600;padding:10px 12px;border-bottom:1px solid #333;
+  font-size:10.5px;text-transform:uppercase;letter-spacing:.4px;color:#8d8d8d}
+.aa-table td{padding:12px;border-bottom:1px solid #282828;vertical-align:top;color:#d6d6d6}
+.band-sel{display:flex;gap:4px;flex-wrap:wrap}
+.band-sel button{border:1px solid #3a3a3a;background:#1e1e1e;color:#9a9a9a;font-size:11px;padding:5px 9px;
+  border-radius:6px;cursor:pointer}
+.band-sel button.on.b-ignored{background:#2c2c2c;color:#ccc;border-color:#4a4a4a}
+.band-sel button.on.b-low{background:var(--sup-bg);color:var(--sup-tx);border-color:#3a4a3e}
+.band-sel button.on.b-medium{background:var(--watch-bg);color:var(--watch-tx);border-color:#4a3f2a}
+.band-sel button.on.b-high{background:var(--stop-bg);color:var(--stop-tx);border-color:#4a3230}
+.recompile-bar{display:flex;align-items:center;gap:14px;background:var(--mon-acc-bg);border:1px solid var(--acc);
+  border-radius:10px;padding:13px 18px;margin-top:16px}
+.recompile-bar .txt{flex:1;font-size:12.5px;color:#e6d9d0}
+.recompile-bar .txt b{color:#fff}
+
+.pt-metric{border:1px solid var(--mon-line);border-radius:10px;padding:14px 16px;background:var(--mon-tile)}
+.pt-metric h4{margin:0 0 8px;font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:#8d8d8d}
+.pt-metric .v{font-size:22px;font-weight:600;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.pt-metric .d{font-size:11.5px;color:#8d8d8d;margin-top:4px}
+.pt-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+@media(max-width:900px){.pt-grid{grid-template-columns:1fr 1fr}}
+
+.conf-row{display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid #282828}
+.conf-row:last-child{border-bottom:0}
+.conf-row .nm{flex:0 0 260px;font-size:13px;font-weight:500;color:var(--ink)}
+.conf-row .bar{flex:1;height:8px;background:#262626;border-radius:5px;overflow:hidden}
+.conf-row .bar i{display:block;height:100%;background:linear-gradient(90deg,#9e7468,#c9a89a)}
+.conf-row .pct{flex:0 0 46px;text-align:right;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;color:#ccc}
+.conf-row .adj{flex:0 0 auto;display:flex;gap:5px}
+.conf-row .adj button{width:24px;height:24px;border-radius:5px;border:1px solid #3a3a3a;background:#1e1e1e;
+  color:#ccc;font-size:14px;cursor:pointer;line-height:1}
+.conf-row .adj button:hover{border-color:#5a5a5a;color:#fff}
+.mon-banner{background:var(--mon-acc-bg);border:1px solid var(--acc);border-radius:9px;padding:11px 15px;
+  font-size:12px;color:#e6d9d0;margin-bottom:18px}
+.pf-align{display:flex;flex-direction:column;gap:9px}
+.pf-crit{display:flex;align-items:center;gap:12px;padding:11px 14px;border:1px solid var(--mon-line);
+  border-radius:8px;background:var(--mon-tile)}
+.pf-crit .nm{flex:1;min-width:0;font-size:13px;color:var(--ink)}
+.pf-crit .gap{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;color:var(--mon-mut);flex:none}
 </style>
 <script id="ns5-monitoring-setup">
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -5509,6 +5572,21 @@ const SPOTDEF = [
    fix:null,fixLabel:'',when:c=>c.unitsOn('RET-02').length===1}
 ];
 
+/* ── fired signals: demo fixture of indicators that have crossed threshold.
+      Each entry references a real IND id — name, threshold, unit, node and
+      proposed mutation are all read live from IND / UMETA rather than duplicated. ── */
+const FIRED = [
+  {id:'I-05',firedAgo:'2h ago',reading:'4.71% annualised, up from 3.9% two weeks ago',
+   path:'10,70 50,66 90,60 130,58 170,50 210,40 250,26 290,18',thrY:30,color:'#a35a55'},
+  {id:'I-02',firedAgo:'1d ago',reading:'z −1.34 across 2 sources',
+   path:'10,20 50,26 90,24 130,34 170,42 210,58 250,64 290,70',thrY:55,color:'#c8a15e'},
+  {id:'I-18',firedAgo:'3d ago',reading:'field flagged "under review" on the ISIN',
+   path:'10,25 90,25 90,70 290,70',thrY:null,color:'#a35a55'},
+  {id:'I-15',firedAgo:'5d ago',reading:'43bp over the trailing 60-day window',
+   path:'10,80 50,74 90,68 130,58 170,48 210,40 250,34 290,28',thrY:60,color:'#c8a15e'}
+];
+const BANDS = ['Ignored','Low','Medium','High'];
+
 /* ── state ─────────────────────────────────────────────────────────────────
    Everything the analyst decides on this stage lives under s.mon and persists
    with the rest of the record. Indicator status is one of:
@@ -5533,6 +5611,10 @@ function M(){
   if(!m.thrOv) m.thrOv = {};
   if(!m.cadOv) m.cadOv = {};
   if(m.live==null) m.live = false;
+  if(!m.sig){ m.sig = {}; FIRED.forEach(f=>{ m.sig[f.id]='open'; }); }
+  if(!m.sigNote) m.sigNote = {};
+  if(!m.sigDraft) m.sigDraft = {};
+  if(!m.posConf) m.posConf = {};
   return m;
 }
 
@@ -6301,6 +6383,164 @@ function footer(){
   '</div>';
 }
 
+/* ── shared veil for a tab with nothing to show yet ── */
+function noUnitsVeil(title){
+  return '<div class="mon">'+pn(title,null,'<div class="veil"><b>No units under monitoring</b>'+
+    '<p>Monitoring is configured from the units of evidence included in the registered decision. '+
+    'Register the decision first.</p></div>')+'</div>';
+}
+
+/* ── canned S3 assessment returns, keyed by the fired indicator id.
+      Simulated demo response, same pattern as the GPS Agent elsewhere in this workflow. ── */
+const SIGCANNED = {
+  'I-05':{text:'Vol spike confirmed by a real regime shift, not a data artefact. Kill condition stands.',band:'High'},
+  'I-02':{text:'Narrative pressure from two sources, but not yet corroborated by a spread move. Watch, don’t downgrade yet.',band:'Low'},
+  'I-18':{text:'Field change looks administrative pending CNMV confirmation; treated as a hard flag until resolved.',band:'High'},
+  'I-15':{text:'Steepening is consistent with the curve-risk thesis on this unit; confirms the existing band.',band:'Medium'}
+};
+
+/* ── SIGNALS: sensors that crossed threshold, awaiting assessment/interpretation ── */
+function sigCard(f){
+  const m = M(), base = IND.find(i=>i.id===f.id), u = unit(base.u)||{id:base.u}, st = m.sig[f.id];
+  return '<div class="sig-card"'+(st==='dismissed'?' style="opacity:.45"':'')+'>'+
+    '<div class="sig-head">'+
+      pill(base.ceil==='red'?'red':'yellow',base.id+(base.kill?' · KILL':''))+
+      '<b class="id">'+esc(u.id)+' · '+(base.node==='n1'?'Node 1':'Node 2')+'</b>'+
+      '<span class="title">'+esc(base.name)+' crossed threshold</span>'+
+      '<span class="sp"></span>'+pill('grey','fired '+f.firedAgo)+
+    '</div>'+
+    '<div class="sig-body">'+
+      '<div class="sig-meta">'+
+        '<div><span class="lbl">Sensor</span> — '+esc(SENS[base.s].n)+'</div>'+
+        '<div><span class="lbl">Threshold</span> — '+esc(thrOf(base))+'</div>'+
+        '<div><span class="lbl">Reads</span> — '+esc(f.reading)+'</div>'+
+        '<div><span class="lbl">Proposes</span> — '+esc(base.prop)+'</div>'+
+        '<div><span class="lbl">Criterion</span> — '+esc(critName(u.criterion_id||''))+'</div>'+
+      '</div>'+
+      '<div class="sig-chart"><svg viewBox="0 0 300 100" width="100%" height="90" aria-hidden="true">'+
+        (f.thrY!=null?'<line x1="0" y1="'+f.thrY+'" x2="300" y2="'+f.thrY+'" stroke="#3a3a3a" stroke-dasharray="3 3"/>':'')+
+        '<polyline points="'+f.path+'" fill="none" stroke="'+f.color+'" stroke-width="2"/></svg></div>'+
+    '</div>'+
+    (st==='interpreting'?sigInterpretForm(f):
+     st==='assessed'?'<div class="sig-acts"><span class="sig-state">Interpreted — see Assessed alerts.</span></div>':
+     st==='dismissed'?'<div class="sig-acts"><span class="sig-state">Dismissed as noise · stays on the record.</span></div>':
+     '<div class="sig-acts">'+
+       '<button class="btn-sm pri" data-act="sig-request" data-i="'+f.id+'">Request assessment</button>'+
+       '<button class="btn-sm gh" data-act="sig-interpret" data-i="'+f.id+'">Interpret directly</button>'+
+       '<button class="btn-sm gh" data-act="sig-dismiss" data-i="'+f.id+'">Dismiss as noise</button>'+
+     '</div>')+
+  '</div>';
+}
+function sigInterpretForm(f){
+  const m = M(), base = IND.find(i=>i.id===f.id);
+  const draft = m.sigDraft[f.id] || {text:'',band:base.ceil==='red'?'High':'Medium'};
+  return '<div class="sig-interpret">'+
+    '<textarea data-sig-draft="'+f.id+'" data-mon-focus="sig-'+f.id+'" '+
+      'placeholder="Your interpretation of this reading...">'+esc(draft.text)+'</textarea>'+
+    '<div class="sig-acts">'+
+      '<div class="band-sel">'+BANDS.map(b=>'<button class="'+(draft.band===b?'on b-'+b.toLowerCase():'')+
+        '" data-act="sig-draft-band" data-i="'+f.id+'" data-b="'+b+'">'+b+'</button>').join('')+'</div>'+
+      '<button class="btn-sm pri" data-act="sig-save" data-i="'+f.id+'">Save interpretation</button>'+
+      '<button class="btn-sm gh" data-act="sig-cancel" data-i="'+f.id+'">Cancel</button>'+
+    '</div></div>';
+}
+function viewSignals(){
+  const m = M();
+  const openN = FIRED.filter(f=>m.sig[f.id]==='open'||m.sig[f.id]==='interpreting').length;
+  const banner = '<div class="mon-banner">'+openN+' sensor'+(openN===1?'':'s')+' crossed threshold and need'+
+    (openN===1?'s':'')+' assessment before they reach the PM. Requesting assessment sends the reading back to '+
+    'S3 for analysis; interpreting directly keeps the read with you.</div>';
+  return '<div class="mon">'+banner+FIRED.map(sigCard).join('')+
+    (m.toast?'<div class="mon-toast" role="status">'+esc(m.toast)+'</div>':'')+'</div>';
+}
+V[51] = ()=> units().length ? viewSignals() : noUnitsVeil('Signals');
+
+/* ── ASSESSED ALERTS: PM sets the final banding, which recompiles tilt/robustness ── */
+function viewAssessed(){
+  const m = M(), s = get();
+  const rows = FIRED.filter(f=>m.sig[f.id]==='assessed');
+  const body = !rows.length
+    ? '<div class="veil"><b>Nothing assessed yet</b><p>Interpretations land here once a signal on the '+
+      'Signals tab is sent to S3 or interpreted directly.</p></div>'
+    : '<table class="aa-table"><thead><tr><th>Signal</th><th>Unit</th><th>Analyst interpretation</th>'+
+      '<th style="width:250px">Banding</th></tr></thead><tbody>'+
+      rows.map(f=>{
+        const base = IND.find(i=>i.id===f.id), uid = base.u, uObj = s.units.find(x=>x.id===uid)||{id:uid};
+        const note = m.sigNote[f.id]||{text:'',src:''};
+        const included = s.decision.included.indexOf(uid)>=0;
+        const cur = included ? (s.decision.bands[uid]||'Low') : 'Ignored';
+        return '<tr><td>'+pill(base.ceil==='red'?'red':'yellow',base.id)+
+          '<div class="smallmut" style="margin-top:6px;color:#8d8d8d">'+
+          esc(note.src==='S3'?'via S3 assessment':'interpreted directly')+'</div></td>'+
+          '<td>'+esc(uid)+' · '+esc(critName(uObj.criterion_id||''))+'</td>'+
+          '<td>'+esc(note.text)+'</td>'+
+          '<td><div class="band-sel">'+BANDS.map(b=>
+            '<button class="'+(cur===b?'on b-'+b.toLowerCase():'')+'" data-act="aa-band" '+
+            'data-u="'+uid+'" data-b="'+b+'" data-s="'+f.id+'">'+b+'</button>').join('')+'</div></td></tr>';
+      }).join('')+'</tbody></table>'+
+      '<div class="recompile-bar"><span class="txt">Changing a banding recomputes tilt and robustness '+
+      'immediately for that unit’s criterion.</span></div>';
+  return '<div class="mon">'+pn('Assessed alerts',
+    'Interpretation returned from S3 assessment or entered directly by the analyst. Set the final banding here.',
+    body)+(m.toast?'<div class="mon-toast" role="status">'+esc(m.toast)+'</div>':'')+'</div>';
+}
+V[52] = ()=> units().length ? viewAssessed() : noUnitsVeil('Assessed alerts');
+
+/* ── POSITION TRACKING: evolution of sensors and node/kill coverage for this position ── */
+function viewPositionTracking(){
+  const m = M(), us = units(), approved = IND.filter(i=>on(i.id));
+  const nodesTot = us.length*2, nodesOn = us.reduce((a,u)=>a+(nodeOn(u.id,'n1')?1:0)+(nodeOn(u.id,'n2')?1:0),0);
+  const killTot = us.reduce((a,u)=>a+branchesOf(u.id),0), killsOn = us.reduce((a,u)=>a+killOn(u.id),0);
+  const awaiting = FIRED.filter(f=>m.sig[f.id]==='open'||m.sig[f.id]==='interpreting').length;
+  const metrics = '<div class="pt-grid">'+
+    '<div class="pt-metric"><h4>Nodes watched</h4><div class="v" style="color:'+
+      (nodesTot&&nodesOn>=nodesTot*0.9?'#93c29b':nodesOn>=nodesTot*0.65?'#d9be8a':'#d09b96')+'">'+
+      nodesOn+' / '+nodesTot+'</div><div class="d">across '+us.length+' units under monitoring</div></div>'+
+    '<div class="pt-metric"><h4>Kill conditions evaluated</h4><div class="v" style="color:'+
+      (killTot&&killsOn>=killTot-1?'#93c29b':'#d9be8a')+'">'+killsOn+' / '+killTot+'</div>'+
+      '<div class="d">'+openSpots().length+' blind spots open</div></div>'+
+    '<div class="pt-metric"><h4>Sensors live</h4><div class="v" style="color:#e3d6cc">'+approved.length+
+      '</div><div class="d">feeding from '+new Set(approved.map(i=>i.s)).size+' data sources</div></div>'+
+    '<div class="pt-metric"><h4>Signals awaiting assessment</h4><div class="v" style="color:'+
+      (awaiting?'#d09b96':'#93c29b')+'">'+awaiting+' / '+FIRED.length+'</div>'+
+      '<div class="d">since registration</div></div>'+
+  '</div>';
+  const table = tbl(['Unit','Sensor','Threshold','Cadence','Kind'],approved.map(i=>{
+    const u = unit(i.u), c = cadOf(i);
+    return [u?u.id:i.u,esc(SENS[i.s].n),esc(thrOf(i)),c.n+' '+c.u,pill(i.kill?'red':'yellow',i.kill?'kill':'watch')];
+  }));
+  return '<div class="mon">'+pn('Position tracking',
+    'Evolution of every approved sensor and its coverage of the causal nodes and kill conditions for this position.',
+    metrics+table)+(m.toast?'<div class="mon-toast" role="status">'+esc(m.toast)+'</div>':'')+'</div>';
+}
+V[53] = ()=> units().length ? viewPositionTracking() : noUnitsVeil('Position tracking');
+
+/* ── PORTFOLIO TRACKING: criterion alignment over time + confidence in the position ── */
+function viewPortfolioTracking(){
+  const m = M(), s = get(), cids = critIds();
+  const rows = cids.map(cid=>{
+    const rd = read(cid), align = deriveAlignment(s,cid);
+    return '<div class="pf-crit"><span class="nm">'+esc(critName(cid))+'</span>'+
+      pill(align==='Strong'?'green':align==='Partial'?'yellow':'red',align)+
+      '<span class="gap">gap '+rd.gap+' · '+(rd.robust?'robust':'fragile')+'</span></div>';
+  }).join('')||'<div class="smallmut" style="padding:18px;text-align:center">No criteria bearing on this idea yet</div>';
+  const confRows = cids.map(cid=>{
+    const v = m.posConf[cid]==null ? 70 : m.posConf[cid];
+    return '<div class="conf-row"><div class="nm">'+esc(critName(cid))+'</div>'+
+      '<div class="bar"><i style="width:'+v+'%"></i></div><div class="pct">'+v+'%</div>'+
+      '<div class="adj"><button data-act="pf-conf" data-c="'+cid+'" data-d="-5" aria-label="Lower confidence">–</button>'+
+      '<button data-act="pf-conf" data-c="'+cid+'" data-d="5" aria-label="Raise confidence">+</button></div></div>';
+  }).join('');
+  return '<div class="mon">'+
+    pn('Portfolio tracking','Investment-criterion alignment for this position, tracked over the monitoring period.',
+      '<div class="pf-align">'+rows+'</div>')+
+    pn('Confidence in the position',
+      'The PM’s own read on each criterion, carried on the record alongside the computed tilt without feeding it.',
+      confRows)+
+    (m.toast?'<div class="mon-toast" role="status">'+esc(m.toast)+'</div>':'')+'</div>';
+}
+V[54] = ()=> units().length ? viewPortfolioTracking() : noUnitsVeil('Portfolio Tracking');
+
 /* ── the screen ── */
 V[46] = function(){
   const m = M();
@@ -6448,6 +6688,63 @@ ACT['mon-sign-spot'] = (e,el)=>{
 ACT['mon-unsign-spot'] = (e,el)=>edit(m=>{ delete m.signed[el.dataset.s]; });
 ACT['mon-hot'] = (e,el)=>edit(m=>{ m.hot = m.hot===el.dataset.k ? null : el.dataset.k; });
 
+/* ── Signals tab ── */
+ACT['sig-request'] = (e,el)=>{
+  const id = el.dataset.i, m = M(), c = SIGCANNED[id]||{text:'Assessment returned from S3.',band:'Medium'};
+  m.sig[id] = 'assessed';
+  m.sigNote[id] = {text:c.text,band:c.band,src:'S3'};
+  save();
+  log('monitoring.signal_sent_s3',{id:id});
+  flash(id+' sent to S3 for assessment — interpretation returned (simulated). See Assessed alerts.');
+};
+ACT['sig-interpret'] = (e,el)=>edit(m=>{ m.sig[el.dataset.i] = 'interpreting'; });
+ACT['sig-cancel']    = (e,el)=>edit(m=>{ m.sig[el.dataset.i] = 'open'; });
+ACT['sig-draft-band'] = (e,el)=>edit(m=>{
+  const id = el.dataset.i;
+  m.sigDraft[id] = m.sigDraft[id] || {text:'',band:'Medium'};
+  m.sigDraft[id].band = el.dataset.b;
+});
+ACT['sig-save'] = (e,el)=>{
+  const id = el.dataset.i, m = M(), d = m.sigDraft[id] || {text:'',band:'Medium'};
+  m.sigNote[id] = {text:d.text||'(no notes entered)',band:d.band,src:'analyst'};
+  m.sig[id] = 'assessed';
+  save();
+  log('monitoring.signal_interpreted',{id:id,band:d.band});
+  flash(id+' interpreted directly. See Assessed alerts.');
+};
+ACT['sig-dismiss'] = (e,el)=>{
+  const id = el.dataset.i, m = M();
+  m.sig[id] = 'dismissed'; save();
+  log('monitoring.signal_dismissed',{id:id});
+  flash(id+' dismissed as noise. It stays on the record as declined.');
+};
+
+/* ── Assessed alerts tab: banding change recompiles tilt/robustness live ── */
+ACT['aa-band'] = (e,el)=>{
+  const uid = el.dataset.u, band = el.dataset.b, s = get();
+  const uObj = s.units.find(x=>x.id===uid);
+  if(!uObj){ return; }
+  const cid = uObj.criterion_id;
+  if(band==='Ignored'){
+    s.decision.included = s.decision.included.filter(id=>id!==uid);
+  } else {
+    if(s.decision.included.indexOf(uid)<0) s.decision.included.push(uid);
+    s.decision.bands[uid] = band;
+  }
+  save();
+  const t = deriveTilt(s,cid), r = deriveRobustness(s,cid);
+  log('monitoring.alert_banded',{unit:uid,band:band,criterion:cid});
+  flash(uid+' banded '+band+'. '+critName(cid)+' recompiled — tilt '+t.direction+' (gap '+t.gap+'), '+
+    (r.result==='Robust'?'robust':'fragile ('+r.failureMode+')')+'.');
+};
+
+/* ── Portfolio tracking tab: confidence in the position, per criterion ── */
+ACT['pf-conf'] = (e,el)=>edit(m=>{
+  const cid = el.dataset.c, d = +el.dataset.d;
+  const cur = m.posConf[cid]==null ? 70 : m.posConf[cid];
+  m.posConf[cid] = Math.max(0,Math.min(100,cur+d));
+});
+
 ACT['mon-start'] = ()=>{
   const m = M();
   const approved = IND.filter(i=>on(i.id)).concat(m.customs.filter(c=>on(c.id)));
@@ -6504,6 +6801,13 @@ document.addEventListener('input',function(ev){
     save();
     monRender();
   }
+  if(el.getAttribute('data-sig-draft')!=null){
+    const id = el.getAttribute('data-sig-draft'), m = M();
+    m.sigDraft[id] = m.sigDraft[id] || {text:'',band:'Medium'};
+    m.sigDraft[id].text = el.value;
+    save();
+    return;
+  }
 },true);
 /* commit the edited field on blur so styling and the revert affordance catch up */
 document.addEventListener('change',function(ev){
@@ -6512,9 +6816,9 @@ document.addEventListener('change',function(ev){
   if(el.getAttribute('data-mon-thr')!=null || el.getAttribute('data-mon-cadn')!=null) monRender();
 },true);
 
-/* ── replace the namespace: one screen, in place of the previous five ── */
+/* ── replace the namespace: five tabs, in place of the previous five compilation screens ── */
 for(let i=SCREENS.length-1;i>=0;i--) if(SCREENS[i].ns===5) SCREENS.splice(i,1);
-SCREENS.push(S(46,5,'Monitoring',1,'Monitoring setup',
+SCREENS.push(S(46,5,'Monitoring',1,'Configure Monitoring',
  'Choose what watches each unit of evidence, at what threshold and how often, before monitoring starts.',
  ['PS-5','PS-10'],'ns5/monitoring-setup',
  RA(PM,[PM,AN],ALL,'high'),['registered'],'registered',
@@ -6529,8 +6833,58 @@ SCREENS.push(S(46,5,'Monitoring',1,'Monitoring setup',
  'Every included unit is watched at its causal nodes and its kill condition, and the residual blind spots are on the record.',
  'The operating loop — firing, the demand gate and the portfolio record — is specified but not part of this setup surface.',
  'collapsed'));
+SCREENS.push(S(51,5,'Monitoring',2,'Signals',
+ 'List every sensor that has crossed its threshold, plot the reading where possible, and route it for assessment.',
+ ['PS-5','PS-10'],'ns5/signals',
+ RA(AN,[PM,AN],ALL,'high'),['registered'],'registered',
+ {table:true},{arrangement:'newly designed'},true,
+ {problem:'A threshold crossing is not yet a decision. Left to fire silently into a mutation, it skips the analyst read that gave every other unit its causal-bearing score.',
+  mechanism:'Each fired sensor is shown against its threshold and its proposed mutation, but nothing is applied automatically. The analyst either sends it back to S3 for assessment, or interprets it directly with a note and a suggested band.',
+  judgment:'The analyst decides whether a reading needs fresh assessment in S3 or can be interpreted from the desk.',
+  machine:'Plots the reading against threshold and proposes the mutation the compiled trigger would make.',
+  interlock:'A fired signal cannot reach the PM banding step without an interpretation attached.',
+  source:'S5 monitoring design.',status:'settled'},
+ 'Review each fired signal and either request assessment or interpret it directly.',
+ 'Every fired signal carries an analyst interpretation before it reaches the PM.',null,'hidden'));
+SCREENS.push(S(52,5,'Monitoring',3,'Assessed alerts',
+ 'Show the PM every interpreted signal, and let the PM set the final banding so the platform can recompile.',
+ ['PS-5','PS-10'],'ns5/assessed-alerts',
+ RA(PM,[PM],ALL,'high'),['registered'],'registered',
+ {table:true},{arrangement:'newly designed'},true,
+ {problem:'An interpretation without a banding decision changes nothing — the tilt and robustness the PM actually acts on stay stale.',
+  mechanism:'Every interpreted signal is shown with its unit, criterion and analyst note. Setting the banding to Ignored, Low, Medium or High writes it to the unit and immediately recompiles the tilt and robustness of that unit’s criterion using the same derivation the decision stage uses.',
+  judgment:'The PM sets or confirms the final banding for each assessed unit.',
+  machine:'Recomputes tilt and robustness the moment a banding changes.',
+  interlock:'Accountability for the banding stays with the PM; the platform only recomputes, it does not decide.',
+  source:'S5 monitoring design.',status:'settled'},
+ 'Set the final banding on each assessed alert.',
+ 'Every assessed alert is banded, and the criterion it touches carries a current tilt and robustness read.',null,'hidden'));
+SCREENS.push(S(53,5,'Monitoring',4,'Position tracking',
+ 'Track the evolution of every sensor, node and kill condition for this position since registration.',
+ ['PS-5','PS-10'],'ns5/position-tracking',
+ RA(PM,[PM,AN],ALL,'standard'),['registered'],'registered',
+ {table:true},{arrangement:'newly designed'},true,
+ {problem:'Coverage that was true at registration decays as sensors are added, dismissed or fired, and nothing shows the current state at the position level.',
+  mechanism:'Reads the same node and kill-condition coverage used at setup, alongside every approved sensor’s current threshold and cadence.',
+  judgment:'None — this is a read surface.',machine:'Aggregates live coverage and sensor state for the position.',
+  interlock:'None.',source:'S5 monitoring design.',status:'settled'},
+ 'Review current coverage and sensor state.',
+ 'The position’s monitoring coverage is visible at a glance.',null,'hidden'));
+SCREENS.push(S(54,5,'Monitoring',5,'Portfolio Tracking',
+ 'Track investment-criterion alignment for this position over time, and record the PM’s confidence in it.',
+ ['PS-5','PS-10'],'ns5/portfolio-tracking',
+ RA(PM,[PM],ALL,'standard'),['registered'],'registered',
+ {table:true},{arrangement:'newly designed'},true,
+ {problem:'Alignment computed once at decision time goes stale as bandings change under monitoring, and there is nowhere to carry the PM’s own confidence read.',
+  mechanism:'Re-derives alignment per criterion from current bands using the same functions as the decision stage, and lets the PM record a confidence level per criterion that travels with the record without feeding the tilt.',
+  judgment:'The PM sets their confidence in each criterion read.',
+  machine:'Recomputes alignment from current state.',
+  interlock:'Confidence is recorded but never substitutes for the computed tilt.',
+  source:'S5 monitoring design.',status:'settled'},
+ 'Review alignment over time and set confidence per criterion.',
+ 'Portfolio-level alignment and the PM’s confidence are both on the record.',null,'hidden'));
 
-/* a single-screen namespace does not need a tab strip */
+/* tab strip now shows five tabs under the workflow timeline */
 const _subnav = subnav;
 subnav = function(sc){ return nsScreens(sc.ns).length<2 ? '' : _subnav(sc); };
 
