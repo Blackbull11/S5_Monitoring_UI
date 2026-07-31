@@ -5302,7 +5302,7 @@ button.mon-metric .go{display:flex;align-items:center;gap:5px;margin-top:9px;
 .sig-body{display:grid;grid-template-columns:1.4fr 1fr;gap:18px;align-items:center}
 .sig-meta{font-size:12px;color:#b8b8b8;line-height:1.7}
 .sig-meta .lbl{color:#7d7d7d}
-.sig-chart{background:#171717;border:1px solid #2c2c2c;border-radius:8px;padding:10px}
+.sig-chart{display:none;background:#171717;border:1px solid #2c2c2c;border-radius:8px;padding:10px}
 .sig-acts{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;align-items:center}
 .btn-sm{border:0;border-radius:7px;padding:8px 13px;font-size:12px;font-weight:600;cursor:pointer}
 .btn-sm.pri{background:var(--acc);color:#fff}
@@ -5355,6 +5355,18 @@ button.mon-metric .go{display:flex;align-items:center;gap:5px;margin-top:9px;
   border-radius:8px;background:var(--mon-tile)}
 .pf-crit .nm{flex:1;min-width:0;font-size:13px;color:var(--ink)}
 .pf-crit .gap{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;color:var(--mon-mut);flex:none}
+
+/* criterion evaluation over time (Position tracking) */
+.ce-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.ce-card{border:1px solid var(--mon-line);border-radius:10px;background:var(--mon-tile);padding:14px 16px}
+.ce-head{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:8px}
+.ce-head .nm{font-size:13px;font-weight:600;color:var(--ink);flex:1;min-width:0}
+.ce-head .gap{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;color:var(--mon-mut);flex:none;width:100%}
+.ce-body{display:flex;flex-direction:column;gap:8px}
+.ce-log{display:flex;flex-direction:column;gap:5px;max-height:120px;overflow-y:auto}
+.ce-ev{font-size:11px;color:#b8b8b8;line-height:1.5;display:flex;gap:7px}
+.ce-ev b{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:600;color:#9a9a9a;flex:none}
+.ce-ev.mut{color:var(--mon-mut)}
 </style>
 <script id="ns5-monitoring-setup">
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -5615,6 +5627,12 @@ function M(){
   if(!m.sigNote) m.sigNote = {};
   if(!m.sigDraft) m.sigDraft = {};
   if(!m.posConf) m.posConf = {};
+  /* the read at the moment monitoring first opens — the fixed start point every
+     criterion's evolution is measured from ── captured once, never overwritten */
+  if(!m.baseline){
+    const s0 = get();
+    m.baseline = {bands:Object.assign({},s0.decision.bands),included:s0.decision.included.slice()};
+  }
   return m;
 }
 
@@ -6486,7 +6504,61 @@ function viewAssessed(){
 }
 V[52] = ()=> units().length ? viewAssessed() : noUnitsVeil('Assessed alerts');
 
-/* ── POSITION TRACKING: evolution of sensors and node/kill coverage for this position ── */
+/* ── criterion evaluation history: reconstructed from the monitoring baseline plus every
+      logged banding change (monitoring.alert_banded), so the trace is exactly what the
+      PM did on Assessed alerts — nothing here is a separate, fakeable data source. ── */
+function tiltAt(cid,bands,included){
+  const s = get();
+  const tmp = Object.assign({},s,{decision:Object.assign({},s.decision,{bands:bands,included:included})});
+  return {t:deriveTilt(tmp,cid),r:deriveRobustness(tmp,cid)};
+}
+function critHistory(cid){
+  const m = M();
+  const bands = Object.assign({},m.baseline.bands);
+  let included = m.baseline.included.slice();
+  const base = tiltAt(cid,bands,included);
+  const points = [{label:'Registered',detail:'Monitoring baseline',
+    gap:base.t.gap,dir:base.t.direction,robust:base.r.result==='Robust'}];
+  const events = get().history.filter(h=>h.type==='monitoring.alert_banded' && h.payload && h.payload.criterion===cid);
+  events.forEach(ev=>{
+    const p = ev.payload;
+    if(p.band==='Ignored') included = included.filter(id=>id!==p.unit);
+    else { if(included.indexOf(p.unit)<0) included.push(p.unit); bands[p.unit] = p.band; }
+    const r = tiltAt(cid,bands,included);
+    points.push({label:(ev.ts||'').replace('T',' ').slice(0,16),detail:p.unit+' banded '+p.band,
+      gap:r.t.gap,dir:r.t.direction,robust:r.r.result==='Robust'});
+  });
+  return points;
+}
+function critSpark(points){
+  const W = 260, H = 50, pad = 6;
+  const max = Math.max(4,...points.map(p=>Math.abs(p.gap)));
+  const x = i => points.length>1 ? pad+(W-2*pad)*i/(points.length-1) : W/2;
+  const y = g => H/2 - (g/max)*(H/2-pad);
+  const path = points.map((p,i)=>x(i)+','+y(p.gap)).join(' ');
+  const col = d => d==='Exploit'?'#93c29b':d==='Mitigate'?'#d09b96':'#8d8d8d';
+  const dots = points.map((p,i)=>'<circle cx="'+x(i)+'" cy="'+y(p.gap)+'" r="3" fill="'+col(p.dir)+'"/>').join('');
+  return '<svg viewBox="0 0 '+W+' '+H+'" width="100%" height="'+H+'" aria-hidden="true">'+
+    '<line x1="'+pad+'" y1="'+(H/2)+'" x2="'+(W-pad)+'" y2="'+(H/2)+'" stroke="#333" stroke-dasharray="2 3"/>'+
+    '<polyline points="'+path+'" fill="none" stroke="#9e7468" stroke-width="1.8"/>'+dots+'</svg>';
+}
+function critEvolutionCard(cid){
+  const points = critHistory(cid), last = points[points.length-1], changes = points.slice(1);
+  const align = last.robust ? 'Strong' : (last.dir==='Balanced' ? 'Weak' : 'Partial');
+  return '<div class="ce-card">'+
+    '<div class="ce-head"><span class="nm">'+esc(critName(cid))+'</span>'+
+      pill(align==='Strong'?'green':align==='Partial'?'yellow':'red',align)+
+      '<span class="gap">gap '+last.gap+' · '+esc(last.dir)+(last.robust?' · robust':' · fragile')+'</span></div>'+
+    '<div class="ce-body">'+critSpark(points)+
+      '<div class="ce-log">'+(changes.length ? changes.map(p=>
+        '<div class="ce-ev"><b>'+esc(p.label)+'</b><span>'+esc(p.detail)+' → gap '+p.gap+' ('+esc(p.dir)+')</span></div>'
+        ).join('') : '<div class="ce-ev mut">No change since registration.</div>')+
+      '</div>'+
+    '</div>'+
+  '</div>';
+}
+
+/* ── POSITION TRACKING: criterion-evaluation evolution, plus sensor and node/kill coverage ── */
 function viewPositionTracking(){
   const m = M(), us = units(), approved = IND.filter(i=>on(i.id));
   const nodesTot = us.length*2, nodesOn = us.reduce((a,u)=>a+(nodeOn(u.id,'n1')?1:0)+(nodeOn(u.id,'n2')?1:0),0);
@@ -6505,13 +6577,18 @@ function viewPositionTracking(){
       (awaiting?'#d09b96':'#93c29b')+'">'+awaiting+' / '+FIRED.length+'</div>'+
       '<div class="d">since registration</div></div>'+
   '</div>';
+  const evo = pn('Criterion evaluation over time',
+    'How each criterion’s tilt and robustness moved as alerts were assessed and banded during monitoring. '+
+    'Every point below is a real banding change made on Assessed alerts, replayed against the same tilt engine the decision stage uses.',
+    '<div class="ce-grid">'+critIds().map(critEvolutionCard).join('')+'</div>');
   const table = tbl(['Unit','Sensor','Threshold','Cadence','Kind'],approved.map(i=>{
     const u = unit(i.u), c = cadOf(i);
     return [u?u.id:i.u,esc(SENS[i.s].n),esc(thrOf(i)),c.n+' '+c.u,pill(i.kill?'red':'yellow',i.kill?'kill':'watch')];
   }));
-  return '<div class="mon">'+pn('Position tracking',
+  const cov = pn('Sensor and coverage state',
     'Evolution of every approved sensor and its coverage of the causal nodes and kill conditions for this position.',
-    metrics+table)+(m.toast?'<div class="mon-toast" role="status">'+esc(m.toast)+'</div>':'')+'</div>';
+    metrics+table);
+  return '<div class="mon">'+evo+cov+(m.toast?'<div class="mon-toast" role="status">'+esc(m.toast)+'</div>':'')+'</div>';
 }
 V[53] = ()=> units().length ? viewPositionTracking() : noUnitsVeil('Position tracking');
 
