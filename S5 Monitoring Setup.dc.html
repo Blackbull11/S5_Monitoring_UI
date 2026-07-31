@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics=""><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><style>
+*{box-sizing:border-box}
+body{margin:0;background:#222222;color:#f6f6f6;font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:#9e7468;text-decoration:none}a:hover{color:#c9a494}
+button{font-family:inherit;cursor:pointer}
+input,textarea{font-family:inherit}
+input::placeholder{color:#6e6e6e}
+::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-track{background:#191919}::-webkit-scrollbar-thumb{background:#333;border-radius:6px;border:2px solid #191919}
+@keyframes popIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+@keyframes slideIn{from{transform:translateX(24px);opacity:0}to{transform:none;opacity:1}}
+</style></helmet>
+
+<div style="min-height:100vh;min-width:1360px;background:#222222;font-size:14px;display:flex;align-items:stretch">
+
+  <aside style="width:214px;flex:0 0 214px;background:#191919;border-right:1px solid #212121;display:flex;flex-direction:column;padding-top:22px;position:sticky;top:0;height:100vh">
+    <div style="display:flex;align-items:center;gap:11px;padding:0 22px 20px">
+      <svg width="30" height="30" viewBox="0 0 40 40" fill="none"><path d="M3 21L36 4l-9.5 16.5L36 37z" fill="#9e7468"></path><path d="M3 21l23.5-.5L36 37z" fill="#c9a89a"></path></svg>
+      <div><b style="display:block;font-size:19px;font-weight:600;letter-spacing:-.3px;line-height:1;color:#f6f6f6">Decision GPS</b><span style="display:block;font-size:9px;letter-spacing:1.1px;color:#8d8d8d;margin-top:4px;text-transform:uppercase">Navigating investment decisions</span></div>
+    </div>
+    <hr style="border:0;border-top:1px solid #242424;margin:0 22px">
+    <div style="padding:15px 22px 17px">
+      <b style="font-size:12.5px;font-weight:700;letter-spacing:.2px;display:block;color:#f6f6f6">{{ portfolio.name }}</b>
+      <span style="font-size:12px;color:#b4b4b4;display:block;margin-top:7px;line-height:1.5">{{ portfolio.meta }}</span>
+    </div>
+    <nav style="overflow-y:auto;flex:1">
+      <div style="font-size:10.5px;letter-spacing:1.1px;color:#6e6e6e;padding:13px 22px 7px;font-weight:600;text-transform:uppercase">Analytics</div>
+      <button onClick="{{ noop }}" style="display:flex;align-items:center;gap:12px;padding:7px 22px;font-size:13px;color:#9a9a9a;border:0;background:none;width:100%;text-align:left" style-hover="background:#1c1c1c;color:#d4d4d4"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" style="flex:none"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect></svg><span>Dashboard</span></button>
+      <button onClick="{{ noop }}" style="display:flex;align-items:center;gap:12px;padding:7px 22px;font-size:13px;color:#9a9a9a;border:0;background:none;width:100%;text-align:left" style-hover="background:#1c1c1c;color:#d4d4d4"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" style="flex:none"><rect x="4" y="3" width="16" height="18" rx="2"></rect><path d="M8 8h8M8 12h8M8 16h5"></path></svg><span>Report Card</span></button>
+      <div style="font-size:10.5px;letter-spacing:1.1px;color:#6e6e6e;padding:15px 22px 7px;font-weight:600;text-transform:uppercase">Ideas</div>
+      <button onClick="{{ noop }}" style="display:flex;align-items:center;gap:12px;padding:7px 22px;font-size:13px;color:#9a9a9a;border:0;background:none;width:100%;text-align:left" style-hover="background:#1c1c1c;color:#d4d4d4"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" style="flex:none"><path d="M12 5v14M5 12h14"></path></svg><span>New Idea</span></button>
+      <button onClick="{{ noop }}" style="display:flex;align-items:center;gap:12px;padding:7px 22px;font-size:13px;color:#9a9a9a;border:0;background:none;width:100%;text-align:left" style-hover="background:#1c1c1c;color:#d4d4d4"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" style="flex:none"><path d="M4 12l6 6L20 6"></path></svg><span>Complete</span></button>
+      <div style="border-top:1px solid #242424;margin:10px 22px 4px"></div>
+      <div style="font-size:11px;letter-spacing:1.1px;color:#7d7d7d;padding:9px 22px 8px;font-weight:600;text-transform:uppercase">S5 · Monitoring</div>
+      <button onClick="{{ noop }}" style="display:flex;align-items:center;gap:12px;padding:9px 22px;font-size:13.5px;color:#f6f6f6;border:0;background:rgba(158,116,104,.16);width:100%;text-align:left;border-left:2px solid #9e7468">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="flex:none" stroke="#9e7468"><path d="M4 12h4l2.5-6 3 12 2.5-6h4" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        <span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Monitoring setup</span>
+      </button>
+      <button onClick="{{ noop }}" style="display:flex;align-items:center;gap:12px;padding:9px 22px;font-size:13.5px;color:#9a9a9a;border:0;background:none;width:100%;text-align:left" style-hover="background:#1c1c1c">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="flex:none" stroke="#7d7d7d"><path d="M5 19V5m0 0h9l-1.5 3L14 11H5" stroke-width="1.7" stroke-linejoin="round"></path></svg>
+        <span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Flag queue</span>
+      </button>
+      <button onClick="{{ noop }}" style="display:flex;align-items:center;gap:12px;padding:9px 22px;font-size:13.5px;color:#9a9a9a;border:0;background:none;width:100%;text-align:left" style-hover="background:#1c1c1c">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="flex:none" stroke="#7d7d7d"><circle cx="12" cy="12" r="8" stroke-width="1.7"></circle><path d="M12 8v4l3 2" stroke-width="1.7" stroke-linecap="round"></path></svg>
+        <span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Position timeline</span>
+      </button>
+    </nav>
+    <div style="border-top:1px solid #242424;padding:15px 22px;display:flex;align-items:center;gap:11px">
+      <div style="width:32px;height:32px;border-radius:50%;background:#3a3a3a;flex:0 0 32px;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:600;color:#cfcfcf;position:relative">{{ me.initials }}<span style="position:absolute;right:-1px;bottom:0px;width:8px;height:8px;border-radius:50%;background:#4caf50;border:2px solid #191919"></span></div>
+      <div style="min-width:0"><b style="font-size:13px;font-weight:500;display:block;color:#f6f6f6;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ me.name }}</b><span style="font-size:11px;color:#8a8a8a;display:block;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ me.title }}</span></div>
+    </div>
+  </aside><main style="flex: 1; min-width: 0; padding: 0 34px; position: relative">
+
+    
+
+    
+
+      <div style="display:flex;align-items:flex-end;gap:36px;padding:26px 0 0;flex-wrap:wrap">
+      <div style="min-width:0;flex:1">
+        <div style="display:flex;align-items:center;gap:9px;font-size:11.5px;color:#7d7d7d;margin-bottom:10px">
+          <span>S5 · Monitoring</span><span style="color:#3d3d3d">/</span><span>{{ idea.title }}</span>
+        </div>
+        <h1 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-.5px;line-height:1.15;color:#f6f6f6">Monitoring setup</h1>
+        <div style="font-size: 12.5px; color: #8d8d8d; margin-top: 11px; margin-bottom: 25px">{{ idea.isin }} · {{ idea.weight }}% NAV · 10 units of evidence · registered 28 Apr</div>
+      </div>
+
+      
+    </div>
+
+        <div style="display: flex; gap: 0px; flex: none; margin-bottom: 22px; margin-left: 6px; justify-content: flex-start; align-items: center">
+        <div style="padding-right: 26px; width: 203px; height: 68px">
+          <div style="font-size: 9.5px; letter-spacing: .9px; text-transform: uppercase; color: #6e6e6e; font-weight: 600; width: 137px; height: 10px">Sensors selected</div>
+          <div style="display:flex;align-items:baseline;gap:5px;margin-top:8px"><b style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:25px;font-weight:600;letter-spacing:-.6px;color:{{ m.sensColor }}">{{ m.sens }}</b><span style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;color:#6e6e6e">/ {{ m.sensTot }}</span></div>
+          <div style="font-size: 10.5px; color: #8d8d8d; margin-top: 9px; width: 164px; height: 27px">{{ m.feedLine }}</div>
+        </div>
+        <div style="padding:0 26px;border-left:1px solid #2c2c2c">
+          <div style="font-size:9.5px;letter-spacing:.9px;text-transform:uppercase;color:#6e6e6e;font-weight:600">Causal nodes watched</div>
+          <div style="display:flex;align-items:baseline;gap:5px;margin-top:8px"><b style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:25px;font-weight:600;letter-spacing:-.6px;color:{{ m.nodeColor }}">{{ m.nodes }}</b><span style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;color:#6e6e6e">/ 20</span></div>
+          <div style="display:flex;gap:2px;margin-top:9px">
+            <sc-for list="{{ m.nodeTicks }}" as="t" hint-placeholder-count="20"><span style="{{ t.style }}"></span></sc-for>
+          </div>
+        </div>
+        <div style="padding:0 26px;border-left:1px solid #2c2c2c">
+          <div style="font-size:9.5px;letter-spacing:.9px;text-transform:uppercase;color:#6e6e6e;font-weight:600">Kill conditions evaluated</div>
+          <div style="display:flex;align-items:baseline;gap:5px;margin-top:8px"><b style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:25px;font-weight:600;letter-spacing:-.6px;color:{{ m.killColor }}">{{ m.kills }}</b><span style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;color:#6e6e6e">/ {{ m.killTot }}</span></div>
+          <div style="display:flex;gap:2px;margin-top:9px">
+            <sc-for list="{{ m.killTicks }}" as="t" hint-placeholder-count="12"><span style="{{ t.style }}"></span></sc-for>
+          </div>
+        </div>
+        <div style="display: flex; background: #2c2c2c; border-radius: 7px; padding: 2px; flex: none; align-items: center; margin-left: 212px">
+        <button data-view="list" onClick="{{ setView }}" style="{{ viewS.list }}">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>List
+        </button>
+        <button data-view="feeds" onClick="{{ setView }}" style="{{ viewS.feeds }}">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 17l4-6 4 3 4-8 6 5"></path></svg>Indicators
+        </button>
+        <button data-view="graph" onClick="{{ setView }}" style="{{ viewS.graph }}">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="5" cy="6" r="2"></circle><circle cx="5" cy="18" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="19" cy="12" r="2"></circle><path d="M7 7l3 4M7 17l3-4M14 12h3"></path></svg>Network
+        </button>
+      </div>
+      </div>
+
+    <sc-if value="{{ isList }}" hint-placeholder-val="{{ true }}">
+      <div style="padding-bottom: 34px; position: relative">
+        <div style="display:flex;align-items:center;gap:12px;margin:2px 0 14px;flex-wrap:wrap">
+          <b style="font-size:13.5px;color:#f6f6f6">Units of evidence</b>
+          <span style="{{ pend.pill }}">{{ pend.label }}</span>
+          <span style="flex:1;height:1px;background:#262626;min-width:16px"></span>
+          <button onClick="{{ approveAll }}" style="{{ pend.btnStyle }}">Recommend selection</button>
+          <button onClick="{{ resetPlan }}" style="background:none;border:1px solid #333;color:#9a9a9a;border-radius:7px;padding:7px 13px;font-size:11.5px" style-hover="color:#dcdcdc;border-color:#4a4a4a">Reset selection</button>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:26px">
+        <sc-for list="{{ groups }}" as="g" hint-placeholder-count="5">
+        <div>
+          <div style="display:flex;align-items:center;gap:11px;padding:0 2px 11px;flex-wrap:wrap">
+            <span style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;color:#9e7468;font-weight:700">{{ g.cid }}</span>
+            <b style="font-size:13.5px;color:#f6f6f6;font-weight:600">{{ g.name }}</b>
+            
+            
+            <span style="flex:1;height:1px;background:#2a2a2a;min-width:20px"></span>
+            <span style="font-size:11.5px;color:#8d8d8d">{{ g.summary }}</span>
+            <button data-cid="{{ g.cid }}" onClick="{{ toggleStack }}" style="{{ g.stackBtn }}" style-hover="border-color:#9e7468;color:#f6f6f6">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" style="flex:none"><path d="M4 7h7M4 12h11M4 17h6"></path><path d="M20 5v14"></path></svg>{{ g.stackLabel }}
+            </button>
+            <sc-if value="{{ g.pending }}" hint-placeholder-val="{{ true }}"></sc-if>
+          </div>
+          <sc-if value="{{ g.stackOpen }}" hint-placeholder-val="{{ false }}">
+            <div style="background:#191919;border:1px solid #2f2f2f;border-radius:9px;padding:16px 18px;margin-bottom:11px">
+              <div style="display:grid;grid-template-columns:minmax(0,1fr) 74px minmax(0,1fr);gap:0;align-items:center">
+                <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;padding-right:14px">
+                  <sc-for list="{{ g.sup }}" as="su" hint-placeholder-count="2">
+                    <div style="{{ su.boxStyle }}">{{ su.id }}</div>
+                  </sc-for>
+                </div>
+                <div style="display:flex;flex-direction:column;align-items:center">
+                  <b style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:22px;font-weight:600;letter-spacing:-.5px;color:{{ g.gapColor }}">{{ g.gapLabel }}</b>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start;padding-left:14px">
+                  <sc-for list="{{ g.opp }}" as="su" hint-placeholder-count="1">
+                    <div style="{{ su.boxStyle }}">{{ su.id }}</div>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+          <div style="display:flex;flex-direction:column;gap:9px">
+          <sc-for list="{{ g.units }}" as="u" hint-placeholder-count="2">
+            <div style="{{ u.cardStyle }}">
+              <div style="display: grid; grid-template-columns: 38px 102px minmax(0,1fr) auto; align-items: center; gap: 0px">
+                <span style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;color:#9e7468;font-weight:700">{{ u.id }}</span>
+                <span style="display: flex; align-items: center; gap: 5px; flex-wrap: wrap; width: 66px; height: 25px"><span style="{{ u.dirPill }}">{{ u.dirLabel }}</span></span>
+                <span style="min-width:0">
+                  <span style="display:block;font-size:13px;color:#f6f6f6;line-height:1.4">{{ u.claim }}</span>
+                  <span style="display:flex;align-items:center;gap:9px;margin-top:6px;flex-wrap:wrap">
+                    <span style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;color:#8d8d8d">{{ u.cid }}</span>
+                    <span style="font-size: 11.5px; color: #7d7d7d; position: relative">{{ u.critName }}</span>
+                    
+                    <sc-if value="{{ u.lb }}" hint-placeholder-val="{{ false }}"></sc-if>
+                  </span>
+                </span>
+                <span style="display:flex;align-items:center;gap:10px;flex:none">
+                  <span style="text-align: right; font-size: 11.5px; line-height: 1.45; width: 218px; flex: none; color: {{ u.statusColor }}; height: 17px">{{ u.statusLabel }}</span>
+                  <sc-if value="{{ u.showApprove }}" hint-placeholder-val="{{ true }}">
+                    
+                  </sc-if>
+                  <button data-unit="{{ u.id }}" onClick="{{ toggleUnit }}" style="background:none;border:1px solid #333;color:#9a9a9a;border-radius:7px;width:30px;height:30px;font-size:12px;flex:none" style-hover="border-color:#4a4a4a;color:#dcdcdc">{{ u.caret }}</button>
+                </span>
+              </div>
+
+              <sc-if value="{{ u.open }}" hint-placeholder-val="{{ true }}">
+                <div style="margin-top:14px;padding-top:14px;border-top:1px solid #262626;display:grid;grid-template-columns:276px minmax(0,1fr);gap:22px;align-items:start">
+
+                  <div style="display:flex;flex-direction:column;gap:14px;padding-left:16px">
+                    <sc-for list="{{ u.rail }}" as="r" hint-placeholder-count="3">
+                      <button data-unit="{{ u.id }}" data-sel="{{ r.key }}" onClick="{{ selectNode }}" style="{{ r.style }}">
+                        <sc-if value="{{ r.line }}" hint-placeholder-val="{{ true }}"><span style="position:absolute;left:-11px;top:24px;bottom:-15px;width:1px;background:#3a3a3a"></span></sc-if>
+                        <span style="{{ r.dotStyle }}"></span>
+                        <span style="min-width:0;display:block;width:100%">
+                          <span style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                            <span style="font-size:9px;letter-spacing:.9px;text-transform:uppercase;color:{{ r.kindColor }};font-weight:700">{{ r.kind }}</span>
+                            <span style="{{ r.pill }}">{{ r.pillLabel }}</span>
+                          </span>
+                          <sc-if value="{{ r.showText }}" hint-placeholder-val="{{ true }}"><span style="display:block;font-size:12px;color:{{ r.color }};margin-top:7px;line-height:1.45">{{ r.text }}</span></sc-if>
+                          <sc-if value="{{ r.isKill }}" hint-placeholder-val="{{ false }}">
+                            <span style="display:flex;flex-direction:column;gap:9px;margin-top:8px">
+                              <sc-for list="{{ r.branches }}" as="b" hint-placeholder-count="2">
+                                <span style="display:flex;align-items:flex-start;gap:8px;min-width:0">
+                                  <span style="{{ b.dot }}"></span>
+                                  <span style="min-width:0">
+                                    <span style="display:block;font-size:12px;color:{{ b.color }};line-height:1.4">{{ b.text }}</span>
+                                    <span style="display:block;font-size:10px;color:#8d8d8d;margin-top:3px;line-height:1.4">{{ b.by }}</span>
+                                  </span>
+                                </span>
+                              </sc-for>
+                            </span>
+                          </sc-if>
+
+                        </span>
+                      </button>
+                    </sc-for>
+                  </div>
+
+                  <div style="min-width:0">
+                    <div style="display:flex;align-items:baseline;gap:10px;padding:0 12px 9px;flex-wrap:wrap">
+                      <span style="font-size:11.5px;color:#dcdcdc">{{ u.listTitle }}</span>
+                      <sc-if value="{{ u.filtered }}" hint-placeholder-val="{{ false }}"><button data-unit="{{ u.id }}" data-sel="all" onClick="{{ selectNode }}" style="background:none;border:0;color:#9e7468;font-size:11.5px;padding:0">show all</button></sc-if>
+                      <span style="margin-left:auto;font-size:11px;color:#8d8d8d">Thresholds are editable. A fired indicator only <b style="color:#a89b93;font-weight:600">proposes</b> its mutation — you disposition it.</span>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:5px">
+                      <sc-for list="{{ u.inds }}" as="i" hint-placeholder-count="3">
+                        <div style="{{ i.rowStyle }}">
+                          <button data-ind="{{ i.id }}" onClick="{{ toggleInd }}" style="{{ i.boxStyle }}">{{ i.check }}</button>
+                          <button data-ind="{{ i.id }}" onClick="{{ toggleInd }}" style="min-width:0;background:none;border:0;padding:0;text-align:left">
+                            <span style="display:block;font-size:8.5px;letter-spacing:.7px;text-transform:uppercase;color:#6e6e6e;font-weight:600">Sensor</span>
+                            <span style="display:block;font-size:12.5px;color:#f6f6f6;line-height:1.35;margin-top:4px">{{ i.name }}</span>
+                            <span style="display:grid;grid-template-columns:52px minmax(0,1fr);gap:4px 8px;align-items:center;margin-top:7px">
+                              <span style="font-size:8.5px;letter-spacing:.7px;text-transform:uppercase;color:#6e6e6e;font-weight:600">Method</span>
+                              <span><span style="{{ i.techPill }}">{{ i.tech }}</span></span>
+                              <span style="font-size:8.5px;letter-spacing:.7px;text-transform:uppercase;color:#6e6e6e;font-weight:600">Indicator</span>
+                              <span style="{{ i.srcStyle }}">{{ i.src }}</span>
+                            </span>
+                          </button>
+                          <div style="min-width:0">
+                            <span style="display:grid;grid-template-columns:minmax(0,1fr) 146px;gap:10px;align-items:start">
+                              <span style="display:block;min-width:0">
+                                <span style="display:block;font-size:8.5px;letter-spacing:.7px;text-transform:uppercase;color:#6e6e6e;font-weight:600;margin-bottom:5px">Fires when · editable</span>
+                                <input value="{{ i.thr }}" data-ind="{{ i.id }}" onChange="{{ onThr }}" style="{{ i.thrStyle }}" style-focus="border-color:#9e7468;background:#242424">
+                              </span>
+                              <span style="display:block">
+                                <span style="display:block;font-size:8.5px;letter-spacing:.7px;text-transform:uppercase;color:#6e6e6e;font-weight:600;margin-bottom:5px">{{ i.cadHead }}</span>
+                                <span style="display:flex;gap:5px">
+                                  <input value="{{ i.cadN }}" data-ind="{{ i.id }}" onChange="{{ onCadN }}" style="{{ i.cadNStyle }}" style-focus="border-color:#9e7468;background:#242424">
+                                  <span style="{{ i.cadUStyle }}">
+                                    <button data-ind="{{ i.id }}" onClick="{{ toggleCadMenu }}" style="{{ i.cadBtnStyle }}">
+                                      <span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ i.cadULabel }}</span>
+                                      <span style="flex:none;font-size:8px;color:#7d7d7d">▼</span>
+                                    </button>
+                                    <sc-if value="{{ i.cadMenu }}" hint-placeholder-val="{{ false }}">
+                                      <span style="position:absolute;left:0;right:0;top:100%;margin-top:4px;z-index:30;background:#2c2c2c;border:1px solid #4a4a4a;border-radius:6px;padding:3px;display:flex;flex-direction:column;gap:1px;box-shadow:0 10px 24px rgba(0,0,0,.55)">
+                                        <sc-for list="{{ i.cadUnits }}" as="cu" hint-placeholder-count="3">
+                                          <button data-ind="{{ i.id }}" data-u="{{ cu.key }}" onClick="{{ onCadU }}" style="{{ cu.style }}">{{ cu.label }}</button>
+                                        </sc-for>
+                                      </span>
+                                    </sc-if>
+                                  </span>
+                                </span>
+                              </span>
+                            </span>
+                            <div style="display: grid; grid-template-columns: 88px minmax(0,1fr); gap: 6px 9px; align-items: baseline; margin-top: 9px">
+                              <span style="font-size: 8.5px; letter-spacing: .7px; text-transform: uppercase; color: #6e6e6e; font-weight: 600; width: 98px; height: 21px">Consequence</span>
+                              <span style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0"><span style="font-size:10.5px;color:#c2c2c2">{{ i.prop }}</span></span>
+                              <sc-if value="{{ i.note }}" hint-placeholder-val="{{ false }}">
+                                
+                                
+                              </sc-if>
+                              <sc-if value="{{ i.edited }}" hint-placeholder-val="{{ false }}">
+                                <span style="font-size:8.5px;letter-spacing:.7px;text-transform:uppercase;color:#9e7468;font-weight:600">Edited</span>
+                                <span><button data-ind="{{ i.id }}" onClick="{{ revertThr }}" style="background:none;border:0;color:#9e7468;font-size:10.5px;padding:0">revert to the engine value</button></span>
+                              </sc-if>
+                            </div>
+                          </div>
+                          <button data-ind="{{ i.id }}" onClick="{{ dismissInd }}" style="background:none;border:0;color:#6e6e6e;font-size:14px;width:24px;height:24px;border-radius:5px;flex:none" style-hover="color:#d09b96">×</button>
+                        </div>
+                      </sc-for>
+                    </div>
+                    <sc-if value="{{ u.empty }}" hint-placeholder-val="{{ false }}">
+                      <div style="background:#2b2519;border:1px dashed #6b5a33;border-radius:8px;padding:16px 18px">
+                        <b style="font-size:12.5px;color:#d9be8a">No indicator watches this node</b>
+                        <div style="font-size:12px;color:#b4b4b4;margin-top:7px;line-height:1.5">{{ u.emptyBody }}</div>
+                        <button data-unit="{{ u.id }}" onClick="{{ seedNode }}" style="margin-top:12px;background:#9e7468;border:0;color:#191919;border-radius:7px;padding:8px 13px;font-size:12px;font-weight:600">Find an indicator for it</button>
+                      </div>
+                    </sc-if>
+                  </div>
+                </div>
+                <div>
+                  <sc-if value="{{ u.hasOff }}" hint-placeholder-val="{{ false }}">
+                    <div style="display:flex;align-items:center;gap:9px;margin-top:9px;font-size:11px;color:#7d7d7d;flex-wrap:wrap"><span>Dismissed</span><sc-for list="{{ u.offs }}" as="o" hint-placeholder-count="1"><button data-ind="{{ o.id }}" onClick="{{ dismissInd }}" style="background:#252525;border:1px dashed #3d3d3d;color:#8d8d8d;border-radius:6px;padding:4px 9px;font-size:10.5px" style-hover="color:#dcdcdc;border-color:#9e7468">{{ o.name }} · restore</button></sc-for></div>
+                  </sc-if>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+          </div>
+        </div>
+        </sc-for>
+        </div>
+
+        <div style="margin-top:22px;background:#191919;border:1px solid #262626;border-radius:9px;padding:17px 19px">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <b style="font-size:13px;color:#f6f6f6">Add custom tracking</b>
+            <span style="font-size:11.5px;color:#8d8d8d">Describe what you want watched. The engine matches it to an automated assessment technique.</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;margin-top:13px;background:#2c2c2c;border:1px solid {{ promptBorder }};border-radius:8px;padding:0 14px">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="#8d8d8d" style="flex:none"><path d="M9.6 3.6c.7 4.6 1.9 5.8 6.4 6.5-4.5.7-5.7 1.9-6.4 6.5-.7-4.6-1.9-5.8-6.4-6.5 4.5-.7 5.7-1.9 6.4-6.5z"></path><path d="M18.2 12.8c.4 2.6 1 3.2 3.5 3.6-2.5.4-3.1 1-3.5 3.6-.4-2.6-1-3.2-3.5-3.6 2.5-.4 3.1-1 3.5-3.6z"></path></svg>
+            <input value="{{ query }}" onChange="{{ onQuery }}" placeholder="e.g. tell me if index issuers get downgraded below BBB− and stay in the sleeve" style="flex:1;min-width:0;background:none;border:0;outline:none;padding:14px 0;font-size:13px;color:#f6f6f6">
+            <sc-if value="{{ hasQuery }}" hint-placeholder-val="{{ false }}"><button onClick="{{ clearQuery }}" style="background:none;border:0;color:#7d7d7d;font-size:15px;flex:none">×</button></sc-if>
+          </div>
+          <sc-if value="{{ hasQuery }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top:13px">
+              <div style="font-size:9.5px;letter-spacing:.9px;text-transform:uppercase;color:#6e6e6e;font-weight:600">{{ matchHead }}</div>
+              <div style="display:flex;flex-direction:column;gap:7px;margin-top:10px">
+                <sc-for list="{{ matches }}" as="mm" hint-placeholder-count="3">
+                  <div style="{{ mm.cardStyle }}">
+                    <div style="display:grid;grid-template-columns:46px minmax(0,1fr) 452px;gap:16px;align-items:center;justify-content:flex-start">
+                      <span style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;color:{{ mm.scoreColor }}">{{ mm.score }}</span>
+                      <span style="min-width: 0; width: 406px; height: 63px">
+                        <span style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><b style="font-size:12.5px;color:#f6f6f6;font-weight:600">{{ mm.name }}</b><span style="{{ mm.techPill }}">{{ mm.tech }}</span></span>
+                        <span style="display:block;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;color:#c9b7ac;margin-top:6px;line-height:1.45">{{ mm.thr }}</span>
+                        <span style="display:block;font-size:11px;color:#8d8d8d;margin-top:5px;line-height:1.45">{{ mm.src }} · {{ mm.cadence }}</span>
+                      </span>
+                      <span style="position:relative;display:flex;gap:10px;align-items:center;width:452px">
+                      <button data-tech="{{ mm.id }}" onClick="{{ toggleTargetMenu }}" style="{{ mm.pickerStyle }}">
+                        <span style="min-width:0;display:block;text-align:left">
+                          <span style="display:block;font-size:8.5px;letter-spacing:.7px;text-transform:uppercase;color:#6e6e6e;font-weight:600">Attach to</span>
+                          <span style="display:flex;align-items:center;gap:8px;margin-top:5px;min-width:0">
+                            <span style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;color:#e3d6cc;flex:none">{{ mm.targetKey }}</span>
+                            <span style="font-size:11.5px;color:#b4b4b4;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ mm.targetName }}</span>
+                          </span>
+                        </span>
+                        <span style="flex:none;font-size:9px;color:#8d8d8d">{{ mm.menuCaret }}</span>
+                      </button>
+                      <sc-if value="{{ mm.menuOpen }}" hint-placeholder-val="{{ false }}">
+                        <div style="position:absolute;right:0;top:100%;margin-top:6px;width:452px;z-index:40;border:1px solid #4a4a4a;border-radius:7px;background:#262626;max-height:284px;overflow-y:auto;padding:6px;box-shadow:0 14px 32px rgba(0,0,0,.6)">
+                          <div style="display:flex;align-items:baseline;gap:8px;padding:6px 8px 8px;flex-wrap:wrap">
+                            <span style="font-size:8.5px;letter-spacing:.7px;text-transform:uppercase;color:#9e7468;font-weight:700">Units of evidence</span>
+                            <span style="font-size:10.5px;color:#7d7d7d">inherits the unit's ceiling and can raise red</span>
+                          </div>
+                          <sc-for list="{{ mm.unitTargets }}" as="tg" hint-placeholder-count="10">
+                            <button data-tech="{{ mm.id }}" data-target="{{ tg.key }}" onClick="{{ pickTarget }}" style="{{ tg.style }}">
+                              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;color:{{ tg.keyColor }};flex:none">{{ tg.label }}</span>
+                              <span style="font-size:11.5px;color:{{ tg.nameColor }};min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ tg.title }}</span>
+                              <span style="{{ tg.metaStyle }}">{{ tg.meta }}</span>
+                            </button>
+                          </sc-for>
+                          <div style="display:flex;align-items:baseline;gap:8px;padding:12px 8px 8px;flex-wrap:wrap;border-top:1px solid #333;margin-top:6px">
+                            <span style="font-size:8.5px;letter-spacing:.7px;text-transform:uppercase;color:#9e7468;font-weight:700">Investment criteria</span>
+                            <span style="font-size:10.5px;color:#7d7d7d">a watch, capped at yellow until S3 promotes it</span>
+                          </div>
+                          <sc-for list="{{ mm.critTargets }}" as="tg" hint-placeholder-count="11">
+                            <button data-tech="{{ mm.id }}" data-target="{{ tg.key }}" onClick="{{ pickTarget }}" style="{{ tg.style }}">
+                              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;color:{{ tg.keyColor }};flex:none">{{ tg.label }}</span>
+                              <span style="font-size:11.5px;color:{{ tg.nameColor }};min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ tg.title }}</span>
+                              <span style="{{ tg.metaStyle }}">{{ tg.meta }}</span>
+                            </button>
+                          </sc-for>
+                        </div>
+                      </sc-if>
+                      <button data-tech="{{ mm.id }}" onClick="{{ attachTech }}" style="{{ mm.btnStyle }}">{{ mm.btnLabel }}</button>
+                      
+                      </span>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ noQuery }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap">
+              <span style="font-size:11px;color:#7d7d7d;margin-right:2px">Try</span>
+              <sc-for list="{{ examples }}" as="ex" hint-placeholder-count="3"><button data-q="{{ ex.q }}" onClick="{{ useExample }}" style="background:#252525;border:1px solid #333;color:#a89b93;border-radius:20px;padding:6px 13px;font-size:11.5px" style-hover="border-color:#9e7468;color:#f6f6f6">{{ ex.label }}</button></sc-for>
+            </div>
+          </sc-if>
+          <sc-if value="{{ hasCustom }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top:15px;padding-top:14px;border-top:1px solid #262626">
+              <div style="font-size:9.5px;letter-spacing:.9px;text-transform:uppercase;color:#6e6e6e;font-weight:600">Your custom tracking</div>
+              <div style="display:flex;flex-direction:column;gap:6px;margin-top:10px">
+                <sc-for list="{{ customs }}" as="i" hint-placeholder-count="1">
+                  <div style="{{ i.rowStyle }}">
+                    <button data-ind="{{ i.id }}" onClick="{{ toggleInd }}" style="{{ i.boxStyle }}">{{ i.check }}</button>
+                    <button data-ind="{{ i.id }}" onClick="{{ toggleInd }}" style="min-width:0;background:none;border:0;padding:0;text-align:left">
+                      <span style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+                        <span style="font-size:8.5px;letter-spacing:.7px;text-transform:uppercase;color:#6e6e6e;font-weight:600">Sensor</span>
+                        <span style="{{ i.ownPill }}">{{ i.ownLabel }}</span>
+                      </span>
+                      <span style="display:block;font-size:12.5px;color:#f6f6f6;line-height:1.35;margin-top:4px">{{ i.name }}</span>
+                      <span style="display:grid;grid-template-columns:52px minmax(0,1fr);gap:4px 8px;align-items:center;margin-top:7px">
+                        <span style="font-size:8.5px;letter-spacing:.7px;text-transform:uppercase;color:#6e6e6e;font-weight:600">Method</span>
+                        <span><span style="{{ i.techPill }}">{{ i.tech }}</span></span>
+                        <span style="font-size:8.5px;letter-spacing:.7px;text-transform:uppercase;color:#6e6e6e;font-weight:600">Indicator</span>
+                        <span style="font-size:10.5px;color:#a8a8a8;min-width:0">{{ i.src }}</span>
+                        <span style="font-size:8.5px;letter-spacing:.7px;text-transform:uppercase;color:#6e6e6e;font-weight:600">Anchor</span>
+                        <span style="display:flex;align-items:center;gap:7px;min-width:0"><span style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;color:#9e7468">{{ i.target }}</span><span style="font-size:10.5px;color:#8d8d8d;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ i.targetName }}</span></span>
+                      </span>
+                    </button>
+                    <div style="min-width:0">
+                      <span style="display:grid;grid-template-columns:minmax(0,1fr) 146px;gap:10px;align-items:start">
+                        <span style="display:block;min-width:0">
+                          <span style="display:block;font-size:8.5px;letter-spacing:.7px;text-transform:uppercase;color:#6e6e6e;font-weight:600;margin-bottom:5px">Fires when · editable</span>
+                          <input value="{{ i.thr }}" data-ind="{{ i.id }}" onChange="{{ onThr }}" style="{{ i.thrStyle }}" style-focus="border-color:#9e7468;background:#242424">
+                        </span>
+                        <span style="display:block">
+                          <span style="display:block;font-size:8.5px;letter-spacing:.7px;text-transform:uppercase;color:#6e6e6e;font-weight:600;margin-bottom:5px">Frequency</span>
+                          <span style="display:flex;gap:5px">
+                            <input value="{{ i.cadN }}" data-ind="{{ i.id }}" onChange="{{ onCadN }}" style="{{ i.cadNStyle }}" style-focus="border-color:#9e7468;background:#242424">
+                            <span style="{{ i.cadUStyle }}">
+                              <button data-ind="{{ i.id }}" onClick="{{ toggleCadMenu }}" style="{{ i.cadBtnStyle }}">
+                                <span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ i.cadULabel }}</span>
+                                <span style="flex:none;font-size:8px;color:#7d7d7d">▼</span>
+                              </button>
+                              <sc-if value="{{ i.cadMenu }}" hint-placeholder-val="{{ false }}">
+                                <span style="position:absolute;left:0;right:0;top:100%;margin-top:4px;z-index:30;background:#2c2c2c;border:1px solid #4a4a4a;border-radius:6px;padding:3px;display:flex;flex-direction:column;gap:1px;box-shadow:0 10px 24px rgba(0,0,0,.55)">
+                                  <sc-for list="{{ i.cadUnits }}" as="cu" hint-placeholder-count="3">
+                                    <button data-ind="{{ i.id }}" data-u="{{ cu.key }}" onClick="{{ onCadU }}" style="{{ cu.style }}">{{ cu.label }}</button>
+                                  </sc-for>
+                                </span>
+                              </sc-if>
+                            </span>
+                          </span>
+                        </span>
+                      </span>
+                      <div style="display:grid;grid-template-columns:88px minmax(0,1fr);gap:6px 9px;align-items:baseline;margin-top:9px">
+                        <span style="font-size:8.5px;letter-spacing:.7px;text-transform:uppercase;color:#6e6e6e;font-weight:600">Then proposes</span>
+                        <span style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0"><span style="font-size:10.5px;color:#c2c2c2">{{ i.prop }}</span><span style="{{ i.ceilPill }}">{{ i.ceilLabel }}</span></span>
+                        <sc-if value="{{ i.edited }}" hint-placeholder-val="{{ false }}">
+                          <span style="font-size:8.5px;letter-spacing:.7px;text-transform:uppercase;color:#9e7468;font-weight:600">Edited</span>
+                          <span><button data-ind="{{ i.id }}" onClick="{{ revertThr }}" style="background:none;border:0;color:#9e7468;font-size:10.5px;padding:0">revert to the engine value</button></span>
+                        </sc-if>
+                      </div>
+                    </div>
+                    <button data-cid="{{ i.id }}" onClick="{{ removeCustom }}" style="background:none;border:0;color:#6e6e6e;font-size:14px;width:24px;height:24px;border-radius:5px;flex:none" style-hover="color:#d09b96">×</button>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isFeeds }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:20px 0 34px">
+        <div style="display:flex;align-items:baseline;gap:11px;margin-bottom:15px;flex-wrap:wrap">
+          <b style="font-size:13.5px;color:#f6f6f6">Every indicator, and the sensors drawn from it</b>
+          <span style="font-size:11.5px;color:#8d8d8d">One indicator can feed several sensors. Each sensor is bound to one unit of evidence and carries its own threshold and frequency.</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:11px">
+          <sc-for list="{{ feeds }}" as="f" hint-placeholder-count="6">
+            <div style="{{ f.cardStyle }}">
+              <div style="display:flex;align-items:center;gap:11px;padding-bottom:11px;border-bottom:1px solid #2a2a2a;flex-wrap:wrap">
+                <span style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;color:#9e7468;font-weight:700">{{ f.sid }}</span>
+                <b style="font-size:13px;color:#f6f6f6;font-weight:600">{{ f.name }}</b>
+                <span style="font-size:11px;color:#8d8d8d">{{ f.src }}</span>
+                <span style="flex:1;height:1px;background:#262626;min-width:16px"></span>
+                <span style="{{ f.statePill }}">{{ f.stateLabel }}</span>
+                <span style="font-size:11px;color:#8d8d8d">{{ f.summary }}</span>
+              </div>
+              <div style="display:grid;grid-template-columns:20px minmax(0,1.05fr) 118px minmax(0,1.15fr) 152px 96px;gap:12px;padding:11px 2px 7px;font-size:8.5px;letter-spacing:.7px;text-transform:uppercase;color:#6e6e6e;font-weight:600">
+                <span></span><span>Sensor</span><span>Unit · node</span><span>Fires when</span><span>Frequency</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:5px">
+                <sc-for list="{{ f.rows }}" as="i" hint-placeholder-count="2">
+                  <div style="{{ i.rowStyle }}">
+                    <button data-ind="{{ i.id }}" onClick="{{ toggleInd }}" style="{{ i.boxStyle }}">{{ i.check }}</button>
+                    <button data-ind="{{ i.id }}" onClick="{{ toggleInd }}" style="min-width:0;background:none;border:0;padding:0;text-align:left">
+                      <span style="display:block;font-size:12px;color:#f6f6f6;line-height:1.35">{{ i.name }}</span>
+                      <span style="display:block;margin-top:5px"><span style="{{ i.techPill }}">{{ i.tech }}</span></span>
+                    </button>
+                    <span style="min-width:0">
+                      <span style="display:block;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;color:#c9b7ac">{{ i.unitTag }}</span>
+                      <span style="display:block;font-size:10px;color:#8d8d8d;margin-top:4px">{{ i.critTag }}</span>
+                    </span>
+                    <input value="{{ i.thr }}" data-ind="{{ i.id }}" onChange="{{ onThr }}" style="{{ i.thrStyle }}" style-focus="border-color:#9e7468;background:#242424">
+                    <span style="display:flex;gap:5px">
+                      <input value="{{ i.cadN }}" data-ind="{{ i.id }}" onChange="{{ onCadN }}" style="{{ i.cadNStyle }}" style-focus="border-color:#9e7468;background:#242424">
+                      <span style="{{ i.cadUStyle }}">
+                        <button data-ind="{{ i.id }}" onClick="{{ toggleCadMenu }}" style="{{ i.cadBtnStyle }}">
+                          <span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ i.cadULabel }}</span>
+                          <span style="flex:none;font-size:8px;color:#7d7d7d">▼</span>
+                        </button>
+                        <sc-if value="{{ i.cadMenu }}" hint-placeholder-val="{{ false }}">
+                          <span style="position:absolute;left:0;right:0;top:100%;margin-top:4px;z-index:30;background:#2c2c2c;border:1px solid #4a4a4a;border-radius:6px;padding:3px;display:flex;flex-direction:column;gap:1px;box-shadow:0 10px 24px rgba(0,0,0,.55)">
+                            <sc-for list="{{ i.cadUnits }}" as="cu" hint-placeholder-count="3">
+                              <button data-ind="{{ i.id }}" data-u="{{ cu.key }}" onClick="{{ onCadU }}" style="{{ cu.style }}">{{ cu.label }}</button>
+                            </sc-for>
+                          </span>
+                        </sc-if>
+                      </span>
+                    </span>
+                    <span></span>
+                  </div>
+                </sc-for>
+              </div>
+              <sc-if value="{{ f.shared }}" hint-placeholder-val="{{ false }}">
+                
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isGraph }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:20px 0 34px">
+        <div style="background:#191919;border:1px solid #262626;border-radius:9px;padding:18px 20px 6px">
+          <div style="display:grid;grid-template-columns:{{ g.cols }};gap:{{ g.gap }}px;font-size:9.5px;letter-spacing:.9px;text-transform:uppercase;color:#6e6e6e;font-weight:600;padding-bottom:14px">
+            <span>Sensors · {{ g.sensorCount }} active</span><span>Units of evidence</span><span>Investment criterion</span>
+          </div>
+          <div style="position:relative;height:{{ g.h }}px">
+            <svg width="100%" height="{{ g.h }}" viewBox="{{ g.viewBox }}" preserveAspectRatio="none" style="position:absolute;inset:0">
+              <sc-for list="{{ g.links }}" as="l" hint-placeholder-count="12"><path d="{{ l.d }}" fill="none" stroke="{{ l.stroke }}" stroke-width="{{ l.w }}"></path></sc-for>
+            </svg>
+            <sc-for list="{{ g.nodes }}" as="n" hint-placeholder-count="18">
+              <button data-node="{{ n.key }}" onClick="{{ hoverNode }}" style="{{ n.style }}">
+                <span style="display:flex;align-items:center;gap:6px;min-width:0">
+                  <sc-if value="{{ n.dot }}" hint-placeholder-val="{{ false }}"><span style="{{ n.dotStyle }}"></span></sc-if>
+                  <span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:{{ n.fs }}px;color:{{ n.color }};font-weight:{{ n.fw }}">{{ n.label }}</span>
+                </span>
+                <sc-if value="{{ n.meta }}" hint-placeholder-val="{{ false }}"><span style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:9.5px;color:#7d7d7d;flex:none;margin-left:8px;white-space:nowrap">{{ n.meta }}</span></sc-if>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:20px;margin-top:13px;flex-wrap:wrap;font-size:11.5px;color:#8d8d8d">
+          <span style="display:flex;align-items:center;gap:7px"><span style="width:16px;height:2px;background:#9e7468;border-radius:2px"></span>approved indicator</span>
+          <span style="display:flex;align-items:center;gap:7px"><span style="width:16px;height:2px;background:#4a4a4a;border-radius:2px"></span>awaiting validation</span>
+          <span style="display:flex;align-items:center;gap:7px"><span style="width:8px;height:8px;border-radius:50%;background:#6D9476"></span>both nodes watched</span>
+          <span style="display:flex;align-items:center;gap:7px"><span style="width:8px;height:8px;border-radius:50%;background:#c8a15e"></span>one node open</span>
+          <span style="display:flex;align-items:center;gap:7px"><span style="width:8px;height:8px;border-radius:50%;background:#a35a55"></span>unwatched</span>
+          <span style="margin-left:auto">{{ g.footer }}</span>
+        </div>
+      </div>
+    </sc-if>
+
+    <div style="position:sticky;bottom:0;z-index:30;background:#222222;border-top:1px solid #2a2a2a;padding:13px 0 17px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:32px">
+      <sc-if value="{{ live }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex;align-items:center;gap:7px;font-size:12px;color:#93c29b;flex:none"><span style="width:6px;height:6px;border-radius:50%;background:#6D9476"></span>Monitoring live</span></sc-if>
+      <div style="font-size:12px;color:#b4b4b4;line-height:1.5;flex:1;min-width:0">{{ footerLine }}</div>
+      <button onClick="{{ start }}" style="flex:none;background:#9e7468;border:0;color:#191919;border-radius:8px;padding:11px 21px;font-size:13px;font-weight:600" style-hover="background:#b08476">{{ startLabel }}</button>
+    </div>
+  </main>
+
+  
+
+  <sc-if value="{{ spotsOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;background:rgba(15,15,15,.6);z-index:70;display:flex;justify-content:flex-end">
+      <div style="width:620px;max-width:100%;background:#191919;border-left:1px solid #333;height:100vh;overflow-y:auto;padding:24px 26px 30px;animation:slideIn .2s ease-out">
+        <div style="display:flex;align-items:flex-start;gap:14px">
+          <div style="flex:1;min-width:0">
+            <b style="font-size:17px;color:#f6f6f6;letter-spacing:-.2px">Blind spots</b>
+            <div style="font-size:12px;color:#8d8d8d;margin-top:7px;line-height:1.55">Derived from what you approved — open nodes, unevaluable kill conditions, criteria with no unit anchored. Close one, or sign for it.</div>
+          </div>
+          <button onClick="{{ closeSpots }}" style="background:none;border:1px solid #3d3d3d;color:#b4b4b4;border-radius:7px;padding:7px 12px;font-size:12px;flex:none">Close</button>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:9px;margin-top:20px">
+          <sc-for list="{{ spotList }}" as="s" hint-placeholder-count="4">
+            <div style="{{ s.cardStyle }}">
+              <div style="display:flex;align-items:center;gap:9px;flex-wrap:wrap">
+                <span style="{{ s.sevPill }}">{{ s.sevLabel }}</span>
+                <span style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;color:#7d7d7d">{{ s.tag }}</span>
+              </div>
+              <b style="display:block;font-size:13px;color:#f6f6f6;font-weight:600;margin-top:9px;line-height:1.4">{{ s.title }}</b>
+              <div style="font-size:12px;color:#b4b4b4;margin-top:7px;line-height:1.55">{{ s.body }}</div>
+              <div style="display:flex;align-items:center;gap:9px;margin-top:13px;flex-wrap:wrap">
+                <sc-if value="{{ s.hasFix }}" hint-placeholder-val="{{ true }}"><button data-spot="{{ s.id }}" onClick="{{ fixSpot }}" style="background:#9e7468;border:0;color:#191919;border-radius:7px;padding:8px 13px;font-size:12px;font-weight:600;white-space:nowrap" style-hover="background:#b08476">{{ s.fixLabel }}</button></sc-if>
+                <button data-spot="{{ s.id }}" onClick="{{ signSpot }}" style="background:none;border:1px solid #3d3d3d;color:#b4b4b4;border-radius:7px;padding:8px 13px;font-size:12px;white-space:nowrap" style-hover="border-color:#6e6e6e;color:#dcdcdc">Sign for it</button>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <sc-if value="{{ hasSigned }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top:16px;border:1px dashed #3d3d3d;border-radius:8px;padding:14px 16px">
+            <div style="font-size:11.5px;color:#8d8d8d">Signed · {{ me.name }} · 30 Jul 2026</div>
+            <div style="display:flex;flex-direction:column;gap:7px;margin-top:10px">
+              <sc-for list="{{ signedList }}" as="sg" hint-placeholder-count="1">
+                <div style="display:flex;align-items:center;gap:10px;font-size:12px;color:#b4b4b4"><span style="flex:1;min-width:0">{{ sg.title }}</span><button data-spot="{{ sg.id }}" onClick="{{ unsignSpot }}" style="background:none;border:0;color:#9e7468;font-size:11.5px;flex:none">reopen</button></div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:90;background:#2c2c2c;border:1px solid #4a4a4a;border-radius:8px;padding:12px 17px;font-size:12.5px;color:#f6f6f6;box-shadow:0 12px 30px rgba(0,0,0,.45);max-width:720px;animation:popIn .16s ease-out">{{ toast }}</div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:980},&quot;preset&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Engine suggestions pending&quot;,&quot;All pre-approved&quot;],&quot;default&quot;:&quot;Engine suggestions pending&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;pace&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Continuous&quot;,&quot;Daily&quot;,&quot;Weekly&quot;],&quot;default&quot;:&quot;Daily&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;sensitivity&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Wide&quot;,&quot;Balanced&quot;,&quot;Strict&quot;],&quot;default&quot;:&quot;Balanced&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  PORTFOLIO = { name: 'BBVA Quality Inversión Conservadora, FI', meta: 'ES0172273007 · Fund of funds · SRI 2 of 7' };
+  IDEA = { title: 'EUR IG corporate-bond sleeve via IEAC', isin: 'IE00B3F81R35', weight: 8 };
+  ME = { name: 'M. Schuller', initials: 'MS', title: 'Credit analyst' };
+
+  CRIT = {
+    'RET-01': 'Benchmark return contribution', 'RET-02': 'Net-of-cost contribution',
+    'RSK-01': 'Volatility objective under 5%', 'RSK-05': 'Interest-rate risk',
+    'GEN-02': 'Fund-of-funds eligible-IIC floor',
+    'RSK-04': 'Low-credit ceiling at most 10%', 'RSK-02': 'Conservative profile, SRI 2 of 7',
+    'RET-03': 'Three-year horizon fit', 'RSK-03': 'Equity exposure ceiling under 30%',
+    'GEN-01': 'Eligible instrument', 'GEN-03': 'Non-harmonised IIC limit at most 30%'
+  };
+  CRIT_ORDER = ['RET-01', 'RET-02', 'RET-03', 'RSK-01', 'RSK-02', 'RSK-03', 'RSK-04', 'RSK-05', 'GEN-01', 'GEN-02', 'GEN-03'];
+
+  UNITS = [
+    { id: 'U1', cid: 'RET-01', dir: 'sup', band: 'H', claim: 'IG carry adds yield over the cash leg, net of all costs.', kill: 'Spreads compress until carry no longer beats cash.', branches: 1, n1: 'IG index YTM sustains a spread over the cash leg', n2: 'Carry accrues net of the ETF cost drag' },
+    { id: 'U3', cid: 'RSK-05', dir: 'opp', band: 'H', claim: 'A rate move of 100bp or more consumes the carry advantage within a year.', kill: 'Curve stabilises, or duration is hedged down.', branches: 2, kb: ['Curve stabilises', 'Duration is hedged down'], n1: 'Policy rates reprice upward', n2: 'Duration transmits the move to price' },
+    { id: 'U2', cid: 'RSK-01', dir: 'sup', band: 'H', claim: 'Sleeve volatility near 3.2% keeps the blend inside the 5% cap.', kill: 'Forecast volatility rises above 4.5%.', branches: 1, n1: 'Sleeve realised volatility holds near 3.2%', n2: 'Blended portfolio volatility stays under 5%' },
+    { id: 'U6', cid: 'GEN-02', dir: 'sup', band: 'H', claim: 'The instrument is an eligible harmonised IIC for the fund-of-funds floor.', kill: 'Instrument loses harmonised UCITS status.', branches: 1, n1: 'IEAC retains harmonised UCITS status', n2: 'Counts toward the 50–100% eligible-IIC floor' },
+    { id: 'U8', cid: 'RET-02', dir: 'sup', band: 'H', claim: 'Net-of-cost contribution stays positive after the full cost drag.', kill: 'Total cost drag exceeds the gross pickup.', branches: 1, n1: 'Gross pickup exceeds the 1.6%/yr cost drag', n2: 'Net contribution stays positive' },
+    { id: 'U4', cid: 'RSK-05', dir: 'sup', band: 'M', claim: 'Short-end holdings absorb about a third of a parallel move.', kill: 'Ladder extended at the next rebalance.', branches: 1, n1: '38% of the sleeve matures inside three years', n2: 'Front-loaded ladder lowers effective duration' },
+    { id: 'U5', cid: 'RSK-05', dir: 'opp', band: 'M', claim: 'Curve steepening extends effective duration beyond the budget.', kill: 'Curve flattens, or the ladder is shortened.', branches: 1, n1: '2s10s curve steepens', n2: 'Ladder reprices faster than the index' },
+    { id: 'U9', cid: 'GEN-02', dir: 'opp', band: 'M', claim: 'Layered fees reduce the net benefit of the eligible-IIC route.', kill: 'Share class changes to a clean fee structure.', branches: 1, n1: 'Two fee layers apply on this route', n2: 'Net investor benefit is partially offset' },
+    { id: 'U10', cid: 'RET-01', dir: 'sup', band: 'M', claim: 'Spread percentile leaves room for compression within the horizon.', kill: 'OAS falls below the 25th percentile.', branches: 1, n1: 'OAS sits at the 62nd percentile of its 10y range', n2: 'Room for compression remains over 3 years' },
+    { id: 'U7', cid: 'RET-01', dir: 'opp', band: 'L', claim: 'Weak price momentum may delay the benchmark-relative benefit.', kill: 'Momentum turns positive for two months.', branches: 1, n1: 'EUR IG momentum stays negative', n2: 'Entry timing erodes early carry' }
+  ];
+
+  SENS = {
+    'S-01': { n: 'IEAC.MI price series', s: 'EODHD prices' },
+    'S-02': { n: 'GARCH(1,1) vol forecast', s: 'in-house recompute' },
+    'S-03': { n: 'EUR IG index OAS / YTM', s: 'EODHD bond indices' },
+    'S-04': { n: '€STR and 12M OIS forward', s: 'EODHD macro' },
+    'S-05': { n: 'Bund 2s10s curve', s: 'EODHD govt yields' },
+    'S-06': { n: 'News · credit tags', s: 'EODHD news' },
+    'S-07': { n: 'News · ECB and policy tags', s: 'EODHD news' },
+    'S-08': { n: 'EMU economic calendar', s: 'EODHD events' },
+    'S-09': { n: 'Issuer rating actions', s: 'Moody\u2019s / S&P / Fitch' },
+    'S-10': { n: 'Fund documents · KID, holdings', s: 'issuer repository' },
+    'S-11': { n: 'ESMA / CNMV register', s: 'UCITS status by ISIN' },
+    'S-12': { n: 'Web corroboration pass', s: 'S3 research prompt' },
+    'S-13': { n: 'ETF flow and NAV premium', s: 'EODHD ETF data' },
+    'S-14': { n: 'Fund cash-leg yield', s: 'internal treasury' },
+    'S-15': { n: 'Own trade book', s: 'internal positions' }
+  };
+
+  T = { z: 'Sentiment deviation', pct: 'Percentile band', mod: 'Model recompute', evt: 'Event window', doc: 'Document diff', reg: 'Register field', book: 'Book state', corr: 'Cross-source count', mom: 'Momentum test', ratio: 'Ratio threshold' };
+
+  IND = [
+    { id: 'I-01', u: 'U1', node: 'n1', s: 'S-03', t: 'mod', name: 'IG YTM spread over cash leg', prop: 'Band H → M', ceil: 'red', kill: true, rec: true, thr: { w: '< 40bp for 3 sessions', b: '< 25bp for 5 sessions', s: '< 15bp for 8 sessions' }, note: 'S4: only a recompute may satisfy this kill' },
+    { id: 'I-02', u: 'U1', node: 'n1', s: 'S-06', t: 'z', name: 'Credit-narrative pressure', prop: 'Confidence −1, schedules I-01', ceil: 'yellow', rec: true, thr: { w: 'z ≤ −0.9 · 1 source', b: 'z ≤ −1.2 · 2 sources', s: 'z ≤ −1.5 · 3 sources' }, note: 'caught M-233 nine days early' },
+    { id: 'I-03', u: 'U1', node: 'n1', s: 'S-09', t: 'corr', name: 'Downgrade cluster in the index', prop: 'Spawn opposing unit, band L', ceil: 'yellow', rec: true, thr: { w: '≥ 2 to BBB− in 45d', b: '≥ 3 to BBB− in 30d', s: '≥ 5 to BBB− in 30d' } },
+    { id: 'I-04', u: 'U1', node: 'n2', s: 'S-10', t: 'doc', name: 'KID cost-line change', prop: 'Confidence −1', ceil: 'yellow', rec: true, thr: { w: '≥ 3bp move', b: '≥ 5bp move', s: '≥ 8bp move' }, note: 'only sensor on node 2' },
+    { id: 'I-05', u: 'U2', node: 'n1', s: 'S-02', t: 'mod', name: 'GARCH forecast volatility', prop: 'Kill condition satisfied', ceil: 'red', kill: true, rec: true, thr: { w: '> 4.2% annualised', b: '> 4.5% annualised', s: '> 4.8% annualised' } },
+    { id: 'I-06', u: 'U2', node: 'n1', s: 'S-01', t: 'mod', name: 'Realised 20d volatility', prop: 'Band H → M', ceil: 'yellow', rec: true, thr: { w: '> 3.6%, or 2.5σ day', b: '> 4.0%, or 3σ day', s: '> 4.4%, or 3.5σ day' } },
+    { id: 'I-07', u: 'U2', node: 'n2', s: 'S-15', t: 'ratio', name: 'Blended post-trade volatility', prop: 'Band −1 + portfolio alert', ceil: 'red', rec: true, thr: { w: '> 4.4%', b: '> 4.6%', s: '> 4.8%' } },
+    { id: 'I-08', u: 'U3', node: 'n1', s: 'S-08', t: 'evt', name: 'ECB decision and HICP window', prop: 'Opens the recompute window', propBy: { w: 'Opens ±72h recompute window', b: 'Opens ±48h recompute window', s: 'Opens ±24h recompute window' }, ceil: 'yellow', rec: true, thr: { w: '±72h around every release', b: '±48h · ECB, HICP flash, accounts', s: '±24h · ECB decisions only' }, note: 'closes the gap between release and poll' },
+    { id: 'I-09', u: 'U3', node: 'n1', s: 'S-04', t: 'mod', name: '12M OIS forward move', prop: 'Confirm band H, or kill on stabilisation', ceil: 'red', kill: true, br: 0, rec: true, thr: { w: '≥ ±35bp over 90d', b: '≥ ±50bp over 90d', s: '≥ ±65bp over 90d' } },
+    { id: 'I-10', u: 'U3', node: 'n2', s: 'S-05', t: 'mod', name: 'Duration × Δyield vs carry accrued', prop: 'Confirm band H', ceil: 'yellow', rec: true, thr: { w: 'exceeds 80% of carry YTD', b: 'exceeds carry YTD', s: 'exceeds 120% of carry YTD' } },
+    { id: 'I-11', u: 'U3', node: 'n1', s: 'S-07', t: 'z', name: 'Dovish-surprise counter-test', prop: 'Confidence −1 on U3', ceil: 'yellow', rec: false, thr: { w: 'z ≥ +1.0 · 1 source', b: 'z ≥ +1.3 · 2 sources', s: 'z ≥ +1.6 · 3 sources' }, note: 'the only indicator that can weaken this unit' },
+    { id: 'I-12', u: 'U3', node: 'n2', s: 'S-15', t: 'book', name: 'Duration hedge booked', prop: 'Kill on hedge, lapse candidate', ceil: 'yellow', kill: true, br: 1, rec: false, thr: { w: 'any hedge or ladder change', b: 'hedge or ladder shortening booked', s: 'hedge above 25% of sleeve duration' }, note: 'second kill branch — no external feed sees it' },
+    { id: 'I-13', u: 'U4', node: 'n1', s: 'S-10', t: 'doc', name: 'Under-3y bucket in holdings file', prop: 'Band M → L, or lapse', ceil: 'yellow', kill: true, rec: true, thr: { w: 'changes ≥ 3pp', b: 'changes ≥ 5pp', s: 'changes ≥ 8pp' }, note: 'monthly file · up to 34d latency' },
+    { id: 'I-14', u: 'U4', node: 'n2', s: 'S-05', t: 'mod', name: 'Key-rate duration profile', prop: 'Confidence ±1', ceil: 'yellow', rec: false, thr: { w: 'weekly vs index', b: 'weekly vs index', s: 'monthly vs index' } },
+    { id: 'I-15', u: 'U5', node: 'n1', s: 'S-05', t: 'mod', name: '2s10s steepening', prop: 'Confirm band M', ceil: 'yellow', rec: true, thr: { w: '≥ 30bp over 60d', b: '≥ 40bp over 60d', s: '≥ 55bp over 60d' }, note: 'raised M-231 · 61bp in six weeks' },
+    { id: 'I-16', u: 'U5', node: 'n1', s: 'S-05', t: 'mod', name: '2s10s flattening', prop: 'Kill satisfied, lapse candidate', ceil: 'yellow', kill: true, rec: false, thr: { w: '≥ 30bp over 60d', b: '≥ 40bp, held 10 sessions', s: '≥ 55bp, held 15 sessions' }, note: 'without it U5 can never be retired' },
+    { id: 'I-17', u: 'U5', node: 'n2', s: 'S-05', t: 'mod', name: '10y key-rate duration drift', prop: 'Band M → H', ceil: 'yellow', rec: false, thr: { w: '≥ 0.2y vs registration', b: '≥ 0.3y vs registration', s: '≥ 0.45y vs registration' } },
+    { id: 'I-18', u: 'U6', node: 'n1', s: 'S-11', t: 'reg', name: 'UCITS harmonisation status', prop: 'Gate PASS → FAIL', ceil: 'red', kill: true, rec: true, thr: { w: 'any field change on the ISIN', b: 'harmonisation field change', s: 'confirmed status revocation' }, note: 'weekly register · up to 7d latency' },
+    { id: 'I-19', u: 'U6', node: 'n1', s: 'S-06', t: 'z', name: 'Regulatory-narrative watch', prop: 'Confidence −1, schedules I-18', ceil: 'yellow', rec: true, thr: { w: 'relevance ≥ 0.65', b: 'relevance ≥ 0.75 · 2 sources', s: 'relevance ≥ 0.85 · 3 sources' } },
+    { id: 'I-20', u: 'U6', node: 'n2', s: 'S-15', t: 'ratio', name: 'Eligible-IIC ratio, post-trade', prop: 'Yellow + portfolio gate alert', ceil: 'yellow', rec: false, thr: { w: 'below 60%', b: 'below 55%', s: 'below 52%' }, note: 'the number the gate is actually about' },
+    { id: 'I-21', u: 'U8', node: 'n1', s: 'S-10', t: 'doc', name: 'TER or KID cost figure', prop: 'Confidence −1', ceil: 'yellow', rec: true, thr: { w: '≥ 2bp change', b: '≥ 3bp change', s: '≥ 5bp change' } },
+    { id: 'I-22', u: 'U8', node: 'n2', s: 'S-14', t: 'mod', name: 'Gross pickup minus cost drag', prop: 'Kill condition satisfied', ceil: 'red', kill: true, rec: true, thr: { w: '< 5bp on rolling 12M', b: '< 0 on rolling 12M', s: '< −10bp on rolling 12M' } },
+    { id: 'I-23', u: 'U8', node: 'n1', s: 'S-13', t: 'pct', name: 'NAV premium / discount', prop: 'Spawn unit on RET-02', ceil: 'yellow', rec: false, thr: { w: '±30bp, 2 sessions', b: '±40bp, 3 sessions', s: '±60bp, 5 sessions' } },
+    { id: 'I-24', u: 'U9', node: 'n1', s: 'S-10', t: 'doc', name: 'Share-class fee schedule', prop: 'Band change on U9', ceil: 'yellow', kill: true, rec: true, thr: { w: 'any change', b: 'any change, either direction', s: 'change ≥ 5bp' }, note: 'raised M-224 on 23 Jul' },
+    { id: 'I-25', u: 'U9', node: 'n2', s: 'S-14', t: 'mod', name: 'Net-of-fee pickup vs single layer', prop: 'Confidence ±1', ceil: 'yellow', rec: false, thr: { w: 'monthly recompute', b: 'monthly recompute', s: 'quarterly recompute' } },
+    { id: 'I-26', u: 'U10', node: 'n1', s: 'S-03', t: 'pct', name: 'IG OAS percentile', prop: 'Kill condition satisfied', ceil: 'red', kill: true, rec: true, thr: { w: 'below 30th percentile', b: 'below 25th percentile', s: 'below 20th percentile' } },
+    { id: 'I-27', u: 'U10', node: 'n2', s: 'S-03', t: 'mod', name: 'Forward compression path', prop: 'Confidence ±1', ceil: 'yellow', rec: false, thr: { w: 'weekly vs 3y horizon', b: 'monthly vs 3y horizon', s: 'quarterly vs 3y horizon' } },
+    { id: 'I-28', u: 'U7', node: 'n1', s: 'S-01', t: 'mom', name: '12-1 momentum on EUR IG', prop: 'Kill satisfied, lapse candidate', ceil: 'yellow', kill: true, rec: true, thr: { w: 'positive 1 month', b: 'positive 2 consecutive months', s: 'positive 3 consecutive months' } },
+    { id: 'I-29', u: 'U7', node: 'n2', s: 'S-13', t: 'mod', name: 'Entry slippage vs index', prop: 'Confidence ±1', ceil: 'yellow', rec: false, thr: { w: '> 10bp on last 2 adds', b: '> 15bp on last 2 adds', s: '> 25bp on last 2 adds' } }
+  ];
+
+  LIB = [
+    { id: 'L-01', name: 'Rating-migration cluster count', t: 'corr', s: 'S-09', ceil: 'yellow', prop: 'Spawn opposing unit', thr: '≥ 3 constituents cross a rating boundary in 30d, weighted by index share', kw: 'downgrade rating fallen angel bbb junk high yield migration credit quality issuer sub-investment' },
+    { id: 'L-02', name: 'Exposure ratio threshold', t: 'ratio', s: 'S-15', ceil: 'yellow', prop: 'Yellow + portfolio alert', thr: 'post-trade sub-IG exposure crosses a stated ceiling', kw: 'exposure ceiling limit 10% breach ratio sleeve bucket allocation stay remain holding compliance' },
+    { id: 'L-03', name: 'Holdings-file diff', t: 'doc', s: 'S-10', ceil: 'yellow', prop: 'Band change or lapse', thr: 'monthly holdings file: named bucket moves beyond tolerance', kw: 'holdings sleeve index constituent portfolio file bucket composition reconstitution stay remain' },
+    { id: 'L-04', name: 'Sentiment deviation vs baseline', t: 'z', s: 'S-06', ceil: 'yellow', prop: 'Confidence −1', thr: 'tag sentiment z-score vs the ticker\u2019s 90d baseline', kw: 'news narrative sentiment story press coverage tone market mood talk headline says' },
+    { id: 'L-05', name: 'Event-window recompute', t: 'evt', s: 'S-08', ceil: 'yellow', prop: 'Opens a recompute window', thr: '±48h around a scheduled release on the EMU calendar', kw: 'ecb meeting decision release inflation hicp calendar announcement event schedule before after' },
+    { id: 'L-06', name: 'Register field watch', t: 'reg', s: 'S-11', ceil: 'red', prop: 'Gate PASS → FAIL', thr: 'a named regulatory field changes on the ISIN', kw: 'ucits regulatory status register esma cnmv eligible harmonised domicile compliance legal' },
+    { id: 'L-07', name: 'Volatility model recompute', t: 'mod', s: 'S-02', ceil: 'red', prop: 'Kill condition satisfied', thr: 'GARCH(1,1) forecast crosses a stated bound', kw: 'volatility vol risk garch forecast swing turbulence variance drawdown choppy' },
+    { id: 'L-08', name: 'Percentile band test', t: 'pct', s: 'S-03', ceil: 'red', prop: 'Kill condition satisfied', thr: 'series falls outside a percentile of its 10y range', thr2: true, kw: 'spread oas valuation rich cheap tight wide percentile expensive compression historical range' },
+    { id: 'L-09', name: 'Curve-shape recompute', t: 'mod', s: 'S-05', ceil: 'yellow', prop: 'Band change', thr: '2s10s or key-rate duration crosses a stated move', kw: 'curve steepen flatten duration rates yield 2s10s bund term structure long end short end' },
+    { id: 'L-10', name: 'Book-state hook', t: 'book', s: 'S-15', ceil: 'yellow', prop: 'Kill on action, lapse candidate', thr: 'a named action is booked on the sleeve', kw: 'hedge trade book rebalance ladder sell buy position action we our own booked' },
+    { id: 'L-11', name: 'Cross-source corroboration', t: 'corr', s: 'S-12', ceil: 'yellow', prop: 'Schedules a recompute', thr: 'n independent sources confirm the same claim inside a window', kw: 'confirm corroborate verify multiple sources rumour rumor check independent true' },
+    { id: 'L-12', name: 'Flow and premium monitor', t: 'pct', s: 'S-13', ceil: 'yellow', prop: 'Spawn unit', thr: 'primary flow or NAV premium beyond a band for n sessions', kw: 'liquidity flow etf premium discount nav redemption creation spread trading volume outflow' },
+    { id: 'L-13', name: 'Momentum test', t: 'mom', s: 'S-01', ceil: 'yellow', prop: 'Kill satisfied, lapse candidate', thr: '12-1 total-return momentum sign persists n months', kw: 'momentum trend price performance direction rally selloff drift entry timing' },
+    { id: 'L-14', name: 'Cost-drag recompute', t: 'mod', s: 'S-14', ceil: 'red', prop: 'Kill condition satisfied', thr: 'rolling gross pickup minus total cost drag crosses zero', kw: 'cost fee ter charge expense drag net layer cheaper share class' }
+  ];
+
+  EXAMPLES = [
+    { label: 'Fallen angels staying in the sleeve', q: 'index issuers downgraded below BBB− that stay in the sleeve and push us toward the 10% low-credit ceiling' },
+    { label: 'ETF liquidity stress', q: 'ETF liquidity: redemptions or NAV discount widening on IEAC' },
+    { label: 'Anything the ECB says off-schedule', q: 'ECB officials talking about rates outside the scheduled meeting calendar' }
+  ];
+
+  SPOTDEF = [
+    { id: 'BS-01', sev: 'stop', tag: 'KILL · U3', title: 'One branch of U3\u2019s kill condition has no approved indicator', body: 'U3 dies two ways: the curve stabilises, or duration is hedged down. The second is an action in your own book — no external feed reports it. U3 is load-bearing on RSK-05, so a stale U3 keeps the criterion reading mitigate on evidence that stopped being true.', fix: ['I-12'], fixLabel: 'Approve I-12 · book hook', when: c => !c.on('I-12') },
+    { id: 'BS-02', sev: 'stop', tag: 'NODE · U6', title: 'The gate watches its label, not its number', body: 'GEN-02 is a PASS / FAIL gate. Node 1 of U6 is covered twice. Node 2 — the eligible-IIC ratio the 50–100% floor is actually about — has none. You would see the status change and miss the ratio drifting.', fix: ['I-20'], fixLabel: 'Approve I-20 · ratio watch', when: c => !c.on('I-20') },
+    { id: 'BS-03', sev: 'stop', tag: 'STRUCTURAL · RSK-04', title: 'RSK-04 carries no unit of evidence, and the sleeve can breach it', body: 'The 10% low-credit ceiling has no unit anchored to it, so no indicator can legally attach. An IG index still transmits fallen angels: constituents downgraded below BBB− stay in until reconstitution. Track it manually at a yellow ceiling, or send it back to S3 for a unit.', fix: null, seed: 'index issuers downgraded below BBB− that stay in the sleeve and push sub-IG exposure toward the 10% ceiling', seedTarget: 'RSK-04', fixLabel: 'Draft custom tracking', when: c => !c.custom('RSK-04') },
+    { id: 'BS-04', sev: 'watch', tag: 'TILT · RSK-05', title: 'RSK-05 is instrumented to confirm itself', body: 'Only the confirming indicators on RSK-05 are approved. I-11, the dovish-surprise counter-test, is the one indicator that can move the net gap against the current mitigate read — the engine ranked it last because narrative is expensive.', fix: ['I-11'], fixLabel: 'Approve I-11 · counter-test', when: c => !c.on('I-11') },
+    { id: 'BS-05', sev: 'watch', tag: 'KILL · U5', title: 'U5 can be confirmed but never retired', body: 'I-15 fires on steepening, which strengthens U5. Nothing approved evaluates the flattening side, so the unit can only ratchet upward — permanently overstating the opposing stack on the criterion that is already fragile.', fix: ['I-16'], fixLabel: 'Approve I-16 · flattening test', when: c => !c.on('I-16') },
+    { id: 'BS-06', sev: 'watch', tag: 'LATENCY · U6', title: 'Seven blind days on the only red-eligible sensor behind a gate', body: 'I-18 reads the ESMA / CNMV register, which refreshes weekly. A status change can sit seven days before the one indicator that can raise a red on GEN-02 sees it. Long enough for the fund to trade into a breach.', fix: null, fixLabel: '', when: () => true },
+    { id: 'BS-07', sev: 'low', tag: 'STRUCTURAL · RET-02', title: 'RET-02 rests on a single unit', body: 'U8 is the only unit on the net-of-cost criterion — no second support, no opposition. Leave-one-out is undefined and any lapse takes the criterion to flat. An evidence problem, not a sensor problem.', fix: null, fixLabel: '', when: () => true }
+  ];
+
+  state = {
+    view: 'list',
+    pace: (this.props.pace || 'Daily').toLowerCase(),
+    sens: (this.props.sensitivity || 'Balanced').toLowerCase()[0] === 'w' ? 'w' : (this.props.sensitivity || 'Balanced').toLowerCase()[0] === 's' ? 's' : 'b',
+    st: this.seed(this.props.preset),
+    open: { U3: true },
+    query: '', target: {}, pendingTarget: null, seedQuery: null, customs: [], signed: {},
+    sel: {}, thrOv: {}, cadOv: {}, cadMenuFor: null, targetMenuFor: null, stackFor: null,
+    spotsOpen: false, live: false, toast: null, hot: null
+  };
+
+  seed(preset) {
+    const st = {};
+    this.IND.forEach(i => { st[i.id] = preset === 'All pre-approved' ? 'on' : 'sug'; });
+    return st;
+  }
+
+  on(id) { return this.state.st[id] === 'on'; }
+  custom(cid) { return this.state.customs.some(c => c.target === cid || (this.CRIT[c.target] && c.target === cid)); }
+  indsOf(u) { return this.IND.filter(i => i.u === u); }
+  thrOf(i) { const o = this.state.thrOv[i.id]; return o === undefined ? i.thr[this.state.sens] : o; }
+  selOf(u) { return this.state.sel[u] || 'all'; }
+  matchSel(i, sel) { return sel === 'all' || (sel === 'kill' ? !!i.kill : i.node === sel); }
+  nodeOn(u, n) { return this.indsOf(u).some(i => i.node === n && this.on(i.id)); }
+  kbOf(u) { const un = this.UNITS.find(x => x.id === u); return un.kb || [un.kill]; }
+  killIndsFor(u, br) { return this.indsOf(u).filter(i => i.kill && (i.br || 0) === br); }
+  killOn(u) { return this.kbOf(u).filter((b, ix) => this.killIndsFor(u, ix).some(i => this.on(i.id))).length; }
+
+  read(cid) {
+    const l = this.UNITS.filter(u => u.cid === cid), bw = b => b === 'H' ? 3 : b === 'M' ? 2 : 1;
+    const sup = l.filter(u => u.dir === 'sup'), opp = l.filter(u => u.dir === 'opp');
+    const sw = sup.reduce((a, u) => a + bw(u.band), 0), ow = opp.reduce((a, u) => a + bw(u.band), 0);
+    const gap = sw - ow, win = (gap > 0 ? sup : opp).slice().sort((a, b) => bw(b.band) - bw(a.band));
+    const base = win[0];
+    let robust = false;
+    if (gap !== 0 && base) {
+      const g2 = (gap > 0 ? sw - bw(base.band) : sw) - (gap < 0 ? ow - bw(base.band) : ow);
+      robust = Math.sign(g2) === Math.sign(gap) && g2 !== 0;
+    }
+    const byBand = a => a.slice().sort((x, y) => bw(y.band) - bw(x.band));
+    return { gap: gap, dir: gap > 0 ? 'exploit' : 'mitigate', robust: robust, base: base ? base.id : null,
+      sup: byBand(sup), opp: byBand(opp), supW: sw, oppW: ow };
+  }
+  bw(b) { return b === 'H' ? 3 : b === 'M' ? 2 : 1; }
+  lb(u) { const un = this.UNITS.find(x => x.id === u), r = this.read(un.cid); return r.base === u && !r.robust; }
+
+  col(k) {
+    const m = {
+      red: ['#d09b96', '#2e2120', '#a35a55'], yellow: ['#d9be8a', '#312a1d', '#4a3f2a'],
+      green: ['#93c29b', '#232e27', '#3a4a3e'], acc: ['#e3d6cc', 'rgba(158,116,104,.16)', '#9e7468'],
+      def: ['#b4b4b4', '#2c2c2c', '#3d3d3d'], mute: ['#8d8d8d', '#252525', '#333']
+    };
+    return m[k] || m.def;
+  }
+  pill(k, up) {
+    const c = this.col(k);
+    return 'display:inline-block;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:9px;font-weight:600;letter-spacing:' + (up ? '.4px' : '.2px') + ';padding:3px 7px;border-radius:9px;white-space:nowrap;color:' + c[0] + ';background:' + c[1] + ';border:1px solid ' + c[2];
+  }
+  seg(a) { return 'border:0;border-radius:6px;padding:6px 12px;font-size:11.5px;font-weight:' + (a ? 600 : 400) + ';background:' + (a ? '#9e7468' : 'transparent') + ';color:' + (a ? '#191919' : '#9a9a9a'); }
+  segIco(a) { return 'display:flex;align-items:center;gap:6px;border:0;border-radius:6px;padding:6px 12px;font-size:11.5px;font-weight:' + (a ? 600 : 400) + ';background:' + (a ? '#9e7468' : 'transparent') + ';color:' + (a ? '#191919' : '#9a9a9a'); }
+
+  flash(m) { clearTimeout(this._t); this.setState({ toast: m }); this._t = setTimeout(() => this.setState({ toast: null }), 6000); }
+  setV(id, v) { this.setState(s => ({ st: Object.assign({}, s.st, { [id]: v }) })); }
+
+  noop = () => {};
+  setView = e => this.setState({ view: e.currentTarget.getAttribute('data-view') });
+  setPace = e => { const p = e.currentTarget.getAttribute('data-pace'); this.setState({ pace: p }); };
+  setSens = e => { const v = e.currentTarget.getAttribute('data-sens'); this.setState({ sens: v }); this.flash('Sensitivity ' + { w: 'wide', b: 'balanced', s: 'strict' }[v] + ' — every threshold below re-derived from the S4 scorecard. ' + (v === 's' ? 'M-233\u2019s narrative precursor drops below the floor at this setting.' : v === 'w' ? 'Expect roughly three times the narrative flags.' : 'The engine\u2019s recommendation for a fragile RSK-05 read.')); };
+  toggleUnit = e => { const id = e.currentTarget.getAttribute('data-unit'); this.setState(s => ({ open: Object.assign({}, s.open, { [id]: !s.open[id] }) })); };
+  selectNode = e => {
+    const u = e.currentTarget.getAttribute('data-unit'), k = e.currentTarget.getAttribute('data-sel');
+    this.setState(s => ({ sel: Object.assign({}, s.sel, { [u]: s.sel[u] === k ? 'all' : k }) }));
+  };
+  onThr = e => { const id = e.currentTarget.getAttribute('data-ind'), v = e.target.value; this.setState(s => ({ thrOv: Object.assign({}, s.thrOv, { [id]: v }) })); };
+  cadDef(i) {
+    if (i.t === 'book') return { n: 15, u: 'minutes' };
+    if (i.t === 'evt') return { n: 1, u: 'hours' };
+    if (i.t === 'doc' || i.t === 'reg') return { n: 1, u: 'days' };
+    return { continuous: { n: 4, u: 'hours' }, daily: { n: 1, u: 'days' }, weekly: { n: 7, u: 'days' } }[this.state.pace];
+  }
+  cadOf2(i) { return this.state.cadOv[i.id] || this.cadDef(i); }
+  setCad(id, patch) {
+    const c = this.state.customs.find(x => x.id === id);
+    const i = this.IND.find(x => x.id === id) || (c ? { id: id, t: c.tech } : { t: 'mod' });
+    const cur = this.cadOf2(i);
+    this.setState(s => ({ cadOv: Object.assign({}, s.cadOv, { [id]: Object.assign({}, cur, patch) }) }));
+  }
+  onCadN = e => { const v = parseInt(e.target.value, 10); this.setCad(e.currentTarget.getAttribute('data-ind'), { n: isNaN(v) ? 1 : Math.max(1, v) }); };
+  toggleCadMenu = e => { const id = e.currentTarget.getAttribute('data-ind'); this.setState(s => ({ cadMenuFor: s.cadMenuFor === id ? null : id })); };
+  onCadU = e => {
+    this.setCad(e.currentTarget.getAttribute('data-ind'), { u: e.currentTarget.getAttribute('data-u') });
+    this.setState({ cadMenuFor: null });
+  };
+  revertThr = e => {
+    const id = e.currentTarget.getAttribute('data-ind');
+    const o = Object.assign({}, this.state.thrOv);
+    delete o[id];
+    this.setState({ thrOv: o });
+    this.flash(id + ' reverted to the engine threshold for ' + { w: 'wide', b: 'balanced', s: 'strict' }[this.state.sens] + ' sensitivity.');
+  };
+  seedNode = e => {
+    const uid = e.currentTarget.getAttribute('data-unit'), u = this.UNITS.find(x => x.id === uid), sel = this.selOf(uid);
+    const text = sel === 'kill' ? u.kill : u[sel];
+    this.setState({ query: text, seedQuery: text, pendingTarget: uid });
+    this.flash('Drafted in Add custom tracking below — the engine is matching an assessment technique to ' + uid + ' ' + (sel === 'kill' ? 'kill condition' : sel === 'n1' ? 'node 1' : 'node 2') + '.');
+  };
+
+  toggleInd = e => {
+    const id = e.currentTarget.getAttribute('data-ind');
+    const c = this.state.customs.find(x => x.id === id);
+    const i = c ? { id: id, ceil: c.ceil, thr: { w: c.thr, b: c.thr, s: c.thr } } : this.IND.find(x => x.id === id);
+    const now = this.state.st[id];
+    this.setV(id, now === 'on' ? 'sug' : 'on');
+    if (now !== 'on') this.flash(id + ' approved · ' + this.thrOf(i) + (i.ceil === 'red' ? ' · red-eligible, it can re-open the S4 read' : i.kill ? ' · makes a kill condition evaluable' : ''));
+  };
+  dismissInd = e => {
+    const id = e.currentTarget.getAttribute('data-ind');
+    const now = this.state.st[id];
+    this.setV(id, now === 'off' ? 'sug' : 'off');
+    if (now !== 'off') this.flash(id + ' dismissed. It stays in the record as declined, and the blind-spot list re-derives.');
+  };
+  approveUnit = e => {
+    const u = e.currentTarget.getAttribute('data-unit');
+    const st = Object.assign({}, this.state.st);
+    let n = 0;
+    this.indsOf(u).forEach(i => { if (st[i.id] === 'sug') { st[i.id] = 'on'; n++; } });
+    this.setState({ st: st });
+    this.flash(u + ' validated · ' + n + ' engine suggestion' + (n === 1 ? '' : 's') + ' approved at ' + { w: 'wide', b: 'balanced', s: 'strict' }[this.state.sens] + ' thresholds.');
+  };
+  approveAll = () => {
+    const st = Object.assign({}, this.state.st);
+    let n = 0;
+    this.IND.forEach(i => { if (st[i.id] === 'sug' && i.rec) { st[i.id] = 'on'; n++; } });
+    this.setState({ st: st });
+    this.flash(n + ' engine-recommended indicators approved in one step. The ' + this.IND.filter(i => !i.rec).length + ' the engine ranked below the line stay pending — those are where the blind spots are.');
+  };
+  resetPlan = () => { this.setState({ st: this.seed(), signed: {} }); this.flash('Reset. All 29 suggestions are pending your validation again.'); };
+  toggleStack = e => { const c = e.currentTarget.getAttribute('data-cid'); this.setState(s => ({ stackFor: s.stackFor === c ? null : c })); };
+  stackRow(u, baseId) {
+    const w = this.bw(u.band), isBase = u.id === baseId;
+    return {
+      id: u.id, claim: u.claim, base: isBase,
+      basePill: this.pill('acc', true),
+      bars: [1, 2, 3].map(n => ({ style: 'width:5px;height:14px;border-radius:2px;background:' + (n <= w ? (u.dir === 'sup' ? '#6D9476' : '#a35a55') : '#2f2f2f') })),
+      boxStyle: 'width:' + Math.round(w / 3 * 100) + '%;height:34px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;font-weight:600;color:#141414;background:' + (u.dir === 'sup' ? '#6D9476' : '#a35a55') + ';box-shadow:' + (isBase ? 'inset 0 0 0 2px #e8ded9' : 'none'),
+      rowStyle: 'display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:7px;background:' + (isBase ? 'rgba(158,116,104,.12)' : '#232323') + ';border:1px solid ' + (isBase ? '#5c4740' : '#2a2a2a')
+    };
+  }
+  looText(cid, r) {
+    if (!r.base) return 'The stack is empty on both sides, so there is no read to test.';
+    const base = this.UNITS.find(u => u.id === r.base);
+    const side = base.dir === 'sup' ? 'supporting' : 'opposing';
+    const after = r.gap - (base.dir === 'sup' ? this.bw(base.band) : -this.bw(base.band));
+    if (r.sup.length + r.opp.length === 1) return 'Only one unit carries ' + cid + '. Remove ' + r.base + ' and the criterion has no read at all — undefined rather than robust, and no indicator can fix that.';
+    if (r.robust) return 'Remove ' + r.base + ', the heaviest ' + side + ' unit, and the net gap goes to ' + (after > 0 ? '+' : '') + after + ' — the read still points the same way. The criterion does not depend on any single unit.';
+    return 'Remove ' + r.base + ', the heaviest ' + side + ' unit, and the net gap goes to ' + (after > 0 ? '+' : '') + after + ' — the read flips or flattens. ' + r.base + ' is load-bearing: its kill condition being evaluable is what keeps this criterion honest.';
+  }
+  approveCrit = e => {
+    const cid = e.currentTarget.getAttribute('data-cid');
+    const ids = this.UNITS.filter(u => u.cid === cid).map(u => u.id);
+    const st = Object.assign({}, this.state.st);
+    let n = 0;
+    this.IND.forEach(i => { if (ids.indexOf(i.u) >= 0 && st[i.id] === 'sug') { st[i.id] = 'on'; n++; } });
+    this.setState({ st: st });
+    const r = this.read(cid);
+    this.flash(cid + ' validated · ' + n + ' indicators approved across ' + ids.length + ' units. The criterion reads ' + r.dir + ' and is ' + (r.robust ? 'robust to leave-one-out.' : 'fragile — it flips if its base unit lapses.'));
+  };
+
+  onQuery = e => {
+    const v = e.target.value;
+    this.setState(s => ({ query: v, pendingTarget: v === s.seedQuery ? s.pendingTarget : null, seedQuery: v === s.seedQuery ? s.seedQuery : null }));
+  };
+  clearQuery = () => this.setState({ query: '', pendingTarget: null, seedQuery: null });
+  useExample = e => this.setState({ query: e.currentTarget.getAttribute('data-q') });
+  toggleTargetMenu = e => { const t = e.currentTarget.getAttribute('data-tech'); this.setState(s => ({ targetMenuFor: s.targetMenuFor === t ? null : t })); };
+  pickTarget = e => {
+    const t = e.currentTarget.getAttribute('data-tech'), k = e.currentTarget.getAttribute('data-target');
+    this.setState(s => ({ target: Object.assign({}, s.target, { [t]: k }), targetMenuFor: null }));
+  };
+
+  matchList() {
+    const q = this.state.query.toLowerCase().replace(/[^a-z0-9€%\- ]/g, ' ');
+    if (q.trim().length < 3) return [];
+    const words = q.split(/\s+/).filter(w => w.length > 2);
+    return this.LIB.map(l => {
+      const kw = l.kw.split(' ');
+      let hits = 0;
+      words.forEach(w => { if (kw.some(k => k.indexOf(w) === 0 || w.indexOf(k) === 0)) hits++; });
+      return { l: l, score: hits / Math.max(3, words.length) };
+    }).filter(x => x.score > 0).sort((a, b) => b.score - a.score).slice(0, 3);
+  }
+
+  attachTech = e => {
+    const tid = e.currentTarget.getAttribute('data-tech'), l = this.LIB.find(x => x.id === tid);
+    const tk = this.state.target[tid] || this.defaultTarget(l);
+    const id = 'C-' + (this.state.customs.length + 1);
+    const c = { id: id, target: tk, name: l.name, thr: l.thr, prop: this.CRIT[tk] && !this.UNITS.some(u => u.id === tk) ? 'Watch · yellow only' : l.prop, ceil: this.UNITS.some(u => u.id === tk) ? l.ceil : 'yellow', tech: l.t, s: l.s };
+    this.setState(s => ({ customs: s.customs.concat([c]), query: '', pendingTarget: null, seedQuery: null, st: Object.assign({}, s.st, { [id]: 'on' }) }));
+    this.flash(this.UNITS.some(u => u.id === tk)
+      ? id + ' attached to ' + tk + ' as a ' + this.T[l.t].toLowerCase() + '. It inherits that unit\u2019s ceiling, so it can raise ' + (l.ceil === 'red' ? 'red' : 'yellow') + '.'
+      : id + ' anchored to ' + tk + ' as a watch. No unit of evidence there yet, so it is capped at yellow until S3 promotes it.');
+  };
+  defaultTarget(l) {
+    if (this.state.pendingTarget) return this.state.pendingTarget;
+    const byS = this.IND.filter(i => i.s === l.s);
+    if (byS.length) return byS[0].u;
+    return 'RSK-04';
+  }
+  targetOpts(l) {
+    const byS = [...new Set(this.IND.filter(i => i.s === l.s).map(i => i.u))].slice(0, 3);
+    const pt = this.state.pendingTarget;
+    return [...new Set(pt ? [pt].concat(byS) : byS.concat(['RSK-04']))].slice(0, 4);
+  }
+  removeCustom = e => { const id = e.currentTarget.getAttribute('data-cid'); this.setState(s => ({ customs: s.customs.filter(c => c.id !== id) })); };
+
+  openSpots = () => this.setState({ spotsOpen: true });
+  closeSpots = () => this.setState({ spotsOpen: false });
+  spots() { return this.SPOTDEF.filter(s => s.when(this)); }
+  fixSpot = e => {
+    const id = e.currentTarget.getAttribute('data-spot'), s = this.SPOTDEF.find(x => x.id === id);
+    if (s.seed) {
+      this.setState({ query: s.seed, seedQuery: s.seed, pendingTarget: s.seedTarget, spotsOpen: false, view: 'list' });
+      this.flash('Drafted below — the engine has matched it to three techniques. Anchor one to RSK-04 and it becomes a watch at a yellow ceiling.');
+      return;
+    }
+    const st = Object.assign({}, this.state.st);
+    s.fix.forEach(i => st[i] = 'on');
+    this.setState({ st: st });
+    this.flash(s.fix.join(', ') + ' approved. Blind spot closed.');
+  };
+  signSpot = e => { const id = e.currentTarget.getAttribute('data-spot'); this.setState(s => ({ signed: Object.assign({}, s.signed, { [id]: true }) })); this.flash('Signed. It goes on the record with your name and is re-tested next quarter.'); };
+  unsignSpot = e => { const id = e.currentTarget.getAttribute('data-spot'); const sg = Object.assign({}, this.state.signed); delete sg[id]; this.setState({ signed: sg }); };
+  hoverNode = e => { const k = e.currentTarget.getAttribute('data-node'); this.setState(s => ({ hot: s.hot === k ? null : k })); };
+  start = () => { this.setState({ live: true }); this.flash('Monitoring live on ' + this.IND.filter(i => this.on(i.id)).length + ' approved indicators. First digest lands tomorrow at 08:00.'); };
+
+  graph() {
+    const s = this.state, hot = s.hot;
+    const onInds = this.IND.filter(i => this.on(i.id));
+    const sensorIds = [...new Set(this.IND.map(i => i.s))].filter(id => this.IND.some(i => i.s === id && s.st[i.id] !== 'off'));
+    const critIds = [...new Set(this.UNITS.map(u => u.cid))];
+    const W = 1000, PAD = 14;
+    const colW = { s: 250, u: 320, c: 250 }, gap = 90;
+    const x = { s: 0, u: colW.s + gap, c: colW.s + gap + colW.u + gap };
+    const rows = { s: Math.max(sensorIds.length, 1), u: this.UNITS.length, c: critIds.length };
+    const H = Math.max(rows.s * 34, rows.u * 46, rows.c * 74) + PAD;
+    const yOf = (n, i, h) => (H / n) * (i + 0.5) + PAD / 2 - h / 2;
+    const nodes = [], links = [];
+    const pos = {};
+
+    sensorIds.forEach((id, i) => {
+      const y = yOf(rows.s, i, 26);
+      pos['s' + id] = { x: x.s + colW.s, y: y + 13 };
+      const live = onInds.some(n => n.s === id);
+      const dim = hot && hot !== 's' + id && !this.IND.some(n => n.s === id && (hot === 'u' + n.u || hot === 'c' + this.UNITS.find(u => u.id === n.u).cid));
+      nodes.push({
+        key: 's' + id, label: this.SENS[id].n, meta: id, dot: false,
+        fs: 11.5, fw: live ? 500 : 400, color: live ? '#dcdcdc' : '#8d8d8d',
+        style: 'position:absolute;left:0;top:' + y + 'px;width:' + (colW.s / W * 100) + '%;height:26px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;border-radius:6px;background:' + (live ? '#2c2c2c' : '#242424') + ';border:1px solid ' + (hot === 's' + id ? '#9e7468' : live ? '#3a3a3a' : '#2c2c2c') + ';opacity:' + (dim ? .3 : 1) + ';text-align:left'
+      });
+    });
+
+    this.UNITS.forEach((u, i) => {
+      const y = yOf(rows.u, i, 34);
+      pos['u' + u.id] = { xl: x.u, xr: x.u + colW.u, y: y + 17 };
+      const nOn = (this.nodeOn(u.id, 'n1') ? 1 : 0) + (this.nodeOn(u.id, 'n2') ? 1 : 0);
+      const dc = nOn === 2 ? '#6D9476' : nOn === 1 ? '#c8a15e' : '#a35a55';
+      const dim = hot && hot !== 'u' + u.id && hot !== 'c' + u.cid && !this.indsOf(u.id).some(n => hot === 's' + n.s);
+      nodes.push({
+        key: 'u' + u.id, label: u.id + ' · ' + u.claim, meta: nOn + '/2', dot: true,
+        dotStyle: 'width:7px;height:7px;border-radius:50%;flex:none;background:' + dc,
+        fs: 11.5, fw: 500, color: '#f6f6f6',
+        style: 'position:absolute;left:' + (x.u / W * 100) + '%;top:' + y + 'px;width:' + (colW.u / W * 100) + '%;height:34px;display:flex;align-items:center;justify-content:space-between;padding:0 11px;border-radius:6px;background:#2c2c2c;border:1px solid ' + (hot === 'u' + u.id ? '#9e7468' : this.lb(u.id) ? '#4a3f2a' : '#3a3a3a') + ';opacity:' + (dim ? .3 : 1) + ';text-align:left'
+      });
+    });
+
+    critIds.forEach((cid, i) => {
+      const y = yOf(rows.c, i, 44), r = this.read(cid);
+      pos['c' + cid] = { x: x.c, y: y + 22 };
+      const dim = hot && hot !== 'c' + cid && !this.UNITS.some(u => u.cid === cid && (hot === 'u' + u.id || this.indsOf(u.id).some(n => hot === 's' + n.s)));
+      nodes.push({
+        key: 'c' + cid, label: cid + ' · ' + this.CRIT[cid], meta: r.robust ? 'robust' : 'fragile', dot: true,
+        dotStyle: 'width:7px;height:7px;border-radius:50%;flex:none;background:' + (r.dir === 'exploit' ? '#6D9476' : '#d09b96'),
+        fs: 12, fw: 600, color: '#f6f6f6',
+        style: 'position:absolute;left:' + (x.c / W * 100) + '%;top:' + y + 'px;width:' + (colW.c / W * 100) + '%;height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;border-radius:6px;background:' + (r.robust ? '#2c2c2c' : '#312a1d') + ';border:1px solid ' + (hot === 'c' + cid ? '#9e7468' : r.robust ? '#3a3a3a' : '#4a3f2a') + ';opacity:' + (dim ? .3 : 1) + ';text-align:left'
+      });
+    });
+
+    this.IND.forEach(i => {
+      if (s.st[i.id] === 'off') return;
+      const a = pos['s' + i.s], b = pos['u' + i.u];
+      if (!a || !b) return;
+      const live = this.on(i.id);
+      const rel = !hot || hot === 's' + i.s || hot === 'u' + i.u || hot === 'c' + this.UNITS.find(u => u.id === i.u).cid;
+      const mx = (a.x + b.xl) / 2;
+      links.push({ d: 'M' + a.x + ',' + a.y + ' C' + mx + ',' + a.y + ' ' + mx + ',' + b.y + ' ' + b.xl + ',' + b.y, stroke: live ? (rel ? '#9e7468' : '#4a3a35') : (rel ? '#4a4a4a' : '#2e2e2e'), w: live ? 1.5 : 1 });
+    });
+    this.UNITS.forEach(u => {
+      const a = pos['u' + u.id], b = pos['c' + u.cid];
+      const live = this.indsOf(u.id).some(i => this.on(i.id));
+      const rel = !hot || hot === 'u' + u.id || hot === 'c' + u.cid || this.indsOf(u.id).some(i => hot === 's' + i.s);
+      const mx = (a.xr + b.x) / 2;
+      links.push({ d: 'M' + a.xr + ',' + a.y + ' C' + mx + ',' + a.y + ' ' + mx + ',' + b.y + ' ' + b.x + ',' + b.y, stroke: live ? (rel ? '#9e7468' : '#4a3a35') : (rel ? '#4a4a4a' : '#2e2e2e'), w: live ? 1.8 : 1 });
+    });
+
+    return {
+      nodes: nodes, links: links, h: H + PAD, viewBox: '0 0 ' + W + ' ' + (H + PAD),
+      cols: (colW.s / W * 100) + '% ' + (colW.u / W * 100) + '% ' + (colW.c / W * 100) + '%',
+      gap: gap / W * 100, sensorCount: sensorIds.filter(id => onInds.some(n => n.s === id)).length,
+      footer: hot ? 'Filtered on one node — click it again to clear.' : 'Click any node to trace its chain.'
+    };
+  }
+
+  renderVals() {
+    const s = this.state;
+    const nodesOn = this.UNITS.reduce((a, u) => a + (this.nodeOn(u.id, 'n1') ? 1 : 0) + (this.nodeOn(u.id, 'n2') ? 1 : 0), 0);
+    const killTot = this.UNITS.reduce((a, u) => a + u.branches, 0);
+    const killOn = this.UNITS.reduce((a, u) => a + this.killOn(u.id), 0);
+    const open = this.spots().filter(x => !s.signed[x.id]);
+    const crit = open.filter(x => x.sev === 'stop').length;
+    const pending = this.IND.filter(i => s.st[i.id] === 'sug').length;
+    const onCount = this.IND.filter(i => this.on(i.id)).length;
+
+    const tick = (i, n, c) => ({ style: 'width:5px;height:5px;border-radius:1px;background:' + (i < n ? c : '#333') });
+    const nodeColor = nodesOn >= 18 ? '#93c29b' : nodesOn >= 13 ? '#d9be8a' : '#d09b96';
+    const killColor = killOn >= killTot - 1 ? '#93c29b' : killOn >= killTot - 3 ? '#d9be8a' : '#d09b96';
+    const spotColor = crit ? '#d09b96' : open.length ? '#d9be8a' : '#93c29b';
+
+    const paceMap = { continuous: 'Continuous', daily: 'Daily', weekly: 'Weekly' };
+    const sensMap = { w: 'Wide', b: 'Balanced', s: 'Strict' };
+    const cadDefault = { continuous: 'intraday, 5×/day', daily: 'daily 18:30', weekly: 'weekly, Friday close' }[s.pace];
+    const cadOf = i => {
+      if (i.t === 'evt') return 'event-driven';
+      if (i.t === 'doc' || i.t === 'reg') return s.pace === 'weekly' ? 'weekly' : 'on publication';
+      if (i.t === 'book') return 'on booking';
+      return cadDefault;
+    };
+
+    const units = this.UNITS.map(u => {
+      const inds = this.indsOf(u.id);
+      const sug = inds.filter(i => s.st[i.id] === 'sug'), onl = inds.filter(i => this.on(i.id));
+      const offs = inds.filter(i => s.st[i.id] === 'off');
+      const kn = this.killOn(u.id), lb = this.lb(u.id);
+      const sel = this.selOf(u.id);
+      const rail = [
+        { key: 'n1', kind: 'Node 1', text: u.n1 }, { key: 'n2', kind: 'Node 2', text: u.n2 },
+        { key: 'kill', kind: 'Kill condition', text: u.kill }
+      ].map((r, ix, arr) => {
+        const mine = inds.filter(i => this.matchSel(i, r.key));
+        const live = mine.filter(i => this.on(i.id)).length;
+        const ok = r.key === 'kill' ? kn >= u.branches : live > 0;
+        const act = sel === r.key;
+        const dc = ok ? '#6D9476' : mine.length ? '#c8a15e' : '#a35a55';
+        const sids = [...new Set(mine.map(i => i.s))];
+        const branches = r.key !== 'kill' ? [] : this.kbOf(u.id).map((b, ix) => {
+          const cov = this.killIndsFor(u.id, ix).filter(i => this.on(i.id));
+          const avail = this.killIndsFor(u.id, ix);
+          return {
+            text: b, color: cov.length ? '#dcdcdc' : '#c2c2c2',
+            dot: 'width:5px;height:5px;margin-top:5px;border-radius:50%;flex:none;background:' + (cov.length ? '#6D9476' : avail.length ? '#c8a15e' : '#a35a55'),
+            by: cov.length ? 'evaluated by ' + cov.map(i => i.id).join(', ') : avail.length ? avail.map(i => i.id).join(', ') + ' can evaluate it — not approved' : 'no indicator can evaluate this branch'
+          };
+        });
+        return {
+          sensorCount: sids.length, branches: branches, isKill: r.key === 'kill', showText: r.key !== 'kill',
+          key: r.key, kind: r.kind, text: r.text, line: ix < arr.length - 1,
+          color: ok ? '#e8e8e8' : '#c2c2c2',
+          kindColor: act ? '#c9a494' : '#8f8580',
+          ruleColor: act ? 'rgba(158,116,104,.32)' : '#2f2f2f',
+          pill: this.pill(ok ? 'green' : r.key === 'kill' ? (kn ? 'yellow' : 'red') : (mine.length ? 'yellow' : 'red')),
+          pillLabel: r.key === 'kill'
+            ? (ok ? 'EVALUATED' : kn ? kn + '/' + u.branches + ' EVALUATED' : 'NOT EVALUATED')
+            : (live ? live + ' WATCHING' : mine.length ? mine.length + ' AVAILABLE' : 'NO INDICATOR'),
+          dotStyle: 'position:absolute;left:-15px;top:15px;width:9px;height:9px;border-radius:50%;background:' + dc + ';box-shadow:0 0 0 3px #191919',
+          style: 'position:relative;display:flex;gap:0;align-items:flex-start;padding:12px 14px 14px;border-radius:8px;text-align:left;width:100%;background:' + (act ? 'rgba(158,116,104,.13)' : '#212121') + ';border:1px solid ' + (act ? '#9e7468' : '#2f2f2f')
+        };
+      });
+      const shown = inds.filter(i => s.st[i.id] !== 'off' && this.matchSel(i, sel));
+      const selName = { n1: 'Node 1', n2: 'Node 2', kill: 'Kill condition' }[sel];
+      return {
+        id: u.id, claim: u.claim, cid: u.cid, critName: this.CRIT[u.cid], kill: u.kill, lb: lb,
+        open: !!s.open[u.id], caret: s.open[u.id] ? '⌃' : '⌄',
+        cardStyle: 'background:#191919;border:1px solid ' + (sug.length && lb ? '#4a3f2a' : sug.length ? '#2f2f2f' : '#262626') + ';border-radius:9px;padding:14px 17px',
+        dirPill: this.pill(u.dir === 'sup' ? 'green' : 'red', true), dirLabel: u.dir === 'sup' ? 'SUPPORTS' : 'OPPOSES',
+        band: u.band, lbPill: this.pill('yellow', true),
+        statusColor: sug.length ? '#d9be8a' : '#93c29b',
+        statusLabel: inds.length + ' available / ' + sug.length + ' suggested / ' + onl.length + ' selected',
+        showApprove: sug.length > 0, approveLabel: 'Approve ' + sug.length,
+        rail: rail, filtered: sel !== 'all',
+        listTitle: sel === 'all' ? 'All ' + shown.length + ' indicators · click a node to filter' : selName + ' · ' + shown.length + (shown.length === 1 ? ' indicator' : ' indicators'),
+        empty: shown.length === 0,
+        emptyBody: sel === 'kill'
+          ? 'Nothing armed here evaluates the kill condition, so the unit can be confirmed but never retired.'
+          : 'The claim can break here and the scorecard would still read intact. Describe what would show it and the engine will match an assessment technique.',
+        hasOff: offs.length > 0, offs: offs.map(i => ({ id: i.id, name: i.id })),
+        inds: shown.map(i => {
+          const a = this.on(i.id);
+          return {
+            id: i.id, name: i.name, thr: this.thrOf(i), prop: i.propBy ? i.propBy[s.sens] : i.prop, note: i.note || '',
+            tech: this.T[i.t], techPill: this.pill('acc'),
+            src: this.SENS[i.s].n, nodeTag: i.node === 'n1' ? '→ node 1' : '→ node 2',
+            srcStyle: sel === 'all'
+              ? 'font-size:10.5px;color:#a8a8a8;min-width:0'
+              : 'font-size:10.5px;min-width:0;color:#e3d6cc;background:rgba(158,116,104,.18);border:1px solid rgba(158,116,104,.45);border-radius:5px;padding:2px 7px',
+            cadHead: 'Frequency',
+            cadN: this.cadOf2(i).n, cadU: this.cadOf2(i).u,
+            cadNStyle: 'width:46px;flex:none;text-align:center;background:' + (s.cadOv[i.id] ? '#242424' : 'transparent') + ';border:1px solid ' + (s.cadOv[i.id] ? '#9e7468' : '#3a3a3a') + ';border-radius:6px;padding:7px 4px;outline:none;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;color:#c9b7ac',
+            cadUStyle: 'position:relative;display:block;flex:1;min-width:0',
+            cadULabel: this.cadOf2(i).u,
+            cadMenu: s.cadMenuFor === i.id,
+            cadBtnStyle: 'display:flex;align-items:center;justify-content:space-between;gap:5px;width:100%;padding:7px 8px;border-radius:6px;text-align:left;font-size:11px;color:#c9b7ac;background:' + (s.cadOv[i.id] ? '#242424' : 'transparent') + ';border:1px solid ' + (s.cadMenuFor === i.id ? '#9e7468' : s.cadOv[i.id] ? '#9e7468' : '#3a3a3a'),
+            cadUnits: ['minutes', 'hours', 'days'].map(x => ({
+              key: x, label: x,
+              style: 'display:block;width:100%;text-align:left;border:0;border-radius:4px;padding:6px 8px;font-size:11px;background:' + (this.cadOf2(i).u === x ? 'rgba(158,116,104,.22)' : 'transparent') + ';color:' + (this.cadOf2(i).u === x ? '#e3d6cc' : '#b4b4b4')
+            })),
+            ceilPill: this.pill(i.ceil === 'red' ? 'red' : 'yellow'), ceilLabel: i.ceil === 'red' ? 'RED' : 'YELLOW MAX',
+            check: a ? '✓' : '',
+            edited: this.state.thrOv[i.id] !== undefined,
+            thrStyle: 'width:100%;background:' + (this.state.thrOv[i.id] !== undefined ? '#242424' : 'transparent') + ';border:1px solid ' + (this.state.thrOv[i.id] !== undefined ? '#9e7468' : '#3a3a3a') + ';border-radius:6px;padding:7px 10px;outline:none;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;color:#c9b7ac;line-height:1.4',
+            boxStyle: 'width:18px;height:18px;margin-top:12px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;flex:none;font-weight:700;color:#191919;padding:0;border:1px solid ' + (a ? '#9e7468' : '#555') + ';background:' + (a ? '#9e7468' : 'transparent'),
+            rowStyle: 'display:grid;grid-template-columns:18px minmax(0,252px) minmax(0,1fr) 24px;gap:14px;align-items:start;padding:13px 12px;border-radius:7px;border:1px solid ' + (a ? '#3a3a3a' : '#2c2c2c') + ';background:' + (a ? '#2c2c2c' : '#212121')
+          };
+        })
+      };
+    });
+
+    const matches = this.matchList().map(m => {
+      const l = m.l, tk = s.target[l.id] || this.defaultTarget(l);
+      const isUnit = this.UNITS.some(u => u.id === tk);
+      return {
+        id: l.id, name: l.name, tech: this.T[l.t], techPill: this.pill('acc'), thr: l.thr,
+        src: this.SENS[l.s].n, cadence: cadOf({ t: l.t }),
+        score: Math.min(97, Math.round(58 + m.score * 42)) + '%',
+        scoreColor: m.score > 0.5 ? '#93c29b' : m.score > 0.25 ? '#d9be8a' : '#8d8d8d',
+        cardStyle: 'background:#2c2c2c;border:1px solid ' + (m.score > 0.5 ? '#4a4038' : '#3a3a3a') + ';border-radius:8px;padding:13px 15px',
+        menuOpen: s.targetMenuFor === l.id, menuCaret: s.targetMenuFor === l.id ? '▲' : '▼',
+        targetKey: tk, targetName: isUnit ? this.UNITS.find(u => u.id === tk).claim : this.CRIT[tk],
+        pickerStyle: 'display:flex;flex:1;min-width:0;align-items:center;justify-content:space-between;gap:10px;padding:9px 12px;border-radius:7px;background:#242424;border:1px solid ' + (s.targetMenuFor === l.id ? '#9e7468' : '#3d3d3d'),
+        unitTargets: this.UNITS.map(u => ({
+          key: u.id, label: u.id, title: u.claim, meta: u.cid,
+          keyColor: tk === u.id ? '#e3d6cc' : '#9e7468', nameColor: tk === u.id ? '#f6f6f6' : '#b4b4b4',
+          metaStyle: 'font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:9.5px;color:#7d7d7d;flex:none;margin-left:auto',
+          style: 'display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:0;border-radius:6px;padding:7px 8px;background:' + (tk === u.id ? 'rgba(158,116,104,.2)' : 'transparent')
+        })),
+        critTargets: this.CRIT_ORDER.map(c => {
+          const anchored = this.UNITS.some(u => u.cid === c);
+          return {
+            key: c, label: c, title: this.CRIT[c], meta: anchored ? this.UNITS.filter(u => u.cid === c).length + ' units' : 'no unit yet',
+            keyColor: tk === c ? '#e3d6cc' : anchored ? '#9e7468' : '#8f7a6a', nameColor: tk === c ? '#f6f6f6' : anchored ? '#b4b4b4' : '#a3907f',
+            metaStyle: 'font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:9.5px;flex:none;margin-left:auto;color:' + (anchored ? '#7d7d7d' : '#a3907f'),
+            style: 'display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:0;border-radius:6px;padding:7px 8px;background:' + (tk === c ? 'rgba(158,116,104,.2)' : 'transparent')
+          };
+        }),
+        btnStyle: 'flex:none;align-self:stretch;background:#9e7468;border:0;color:#191919;border-radius:7px;padding:9px 14px;font-size:12px;font-weight:600;white-space:nowrap',
+        btnLabel: 'Attach to ' + tk,
+        ceilNote: isUnit ? (l.ceil === 'red' ? 'inherits red ceiling' : 'yellow ceiling') : 'watch · yellow only'
+      };
+    });
+
+    return {
+      portfolio: this.PORTFOLIO, idea: this.IDEA, me: this.ME, noop: this.noop, toast: s.toast, live: s.live,
+      isList: s.view === 'list', isGraph: s.view === 'graph', isFeeds: s.view === 'feeds',
+      feeds: Object.keys(this.SENS).map(sid => {
+        const list = this.IND.filter(i => i.s === sid && s.st[i.id] !== 'off')
+          .concat(s.customs.filter(c => c.s === sid).map(c => ({ id: c.id, s: sid, t: c.tech, name: c.name, u: c.target, node: null, ceil: c.ceil, thr: { w: c.thr, b: c.thr, s: c.thr }, custom: true })));
+        const onN = list.filter(i => this.on(i.id)).length;
+        const units = [...new Set(list.map(i => i.u))];
+        return {
+          sid: sid, name: this.SENS[sid].n, src: this.SENS[sid].s, count: list.length,
+          cardStyle: 'background:#191919;border:1px solid ' + (onN ? '#2f2f2f' : '#262626') + ';border-radius:9px;padding:15px 18px',
+          statePill: this.pill(onN ? 'green' : 'def', true), stateLabel: onN ? onN + ' ACTIVE' : 'IDLE',
+          summary: list.length + (list.length === 1 ? ' sensor · ' : ' sensors · ') + units.length + (units.length === 1 ? ' unit' : ' units'),
+          shared: units.length > 1,
+          sharedNote: 'One indicator, ' + units.length + ' units — ' + units.join(', ') + ' — each with its own threshold. A gap on this feed degrades all of them at once.',
+          rows: list.map(i => {
+            const a = this.on(i.id), cad = this.cadOf2(i);
+            const isUnit = this.UNITS.some(u => u.id === i.u);
+            return {
+              id: i.id, name: i.name, tech: this.T[i.t], techPill: this.pill('acc'),
+              unitTag: i.u + (i.node ? ' · ' + (i.node === 'n1' ? 'node 1' : 'node 2') : i.custom ? ' · custom' : ''),
+              critTag: isUnit ? this.UNITS.find(u => u.id === i.u).cid : 'watch',
+              thr: this.thrOf(i), check: a ? '✓' : '',
+              ceilPill: this.pill(i.ceil === 'red' ? 'red' : 'yellow'), ceilLabel: i.ceil === 'red' ? 'RED' : 'YELLOW MAX',
+              cadN: cad.n, cadULabel: cad.u, cadMenu: s.cadMenuFor === i.id,
+              cadNStyle: 'width:40px;flex:none;text-align:center;background:' + (s.cadOv[i.id] ? '#242424' : 'transparent') + ';border:1px solid ' + (s.cadOv[i.id] ? '#9e7468' : '#3a3a3a') + ';border-radius:6px;padding:6px 3px;outline:none;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;color:#c9b7ac',
+              cadUStyle: 'position:relative;display:block;flex:1;min-width:0',
+              cadBtnStyle: 'display:flex;align-items:center;justify-content:space-between;gap:4px;width:100%;padding:6px 7px;border-radius:6px;text-align:left;font-size:10.5px;color:#c9b7ac;background:' + (s.cadOv[i.id] ? '#242424' : 'transparent') + ';border:1px solid ' + (s.cadMenuFor === i.id || s.cadOv[i.id] ? '#9e7468' : '#3a3a3a'),
+              cadUnits: ['minutes', 'hours', 'days'].map(x => ({
+                key: x, label: x,
+                style: 'display:block;width:100%;text-align:left;border:0;border-radius:4px;padding:6px 8px;font-size:11px;background:' + (cad.u === x ? 'rgba(158,116,104,.22)' : 'transparent') + ';color:' + (cad.u === x ? '#e3d6cc' : '#b4b4b4')
+              })),
+              thrStyle: 'width:100%;min-width:0;background:' + (s.thrOv[i.id] !== undefined ? '#242424' : 'transparent') + ';border:1px solid ' + (s.thrOv[i.id] !== undefined ? '#9e7468' : '#3a3a3a') + ';border-radius:6px;padding:6px 9px;outline:none;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;color:#c9b7ac',
+              boxStyle: 'width:18px;height:18px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;flex:none;font-weight:700;color:#191919;padding:0;border:1px solid ' + (a ? '#9e7468' : '#555') + ';background:' + (a ? '#9e7468' : 'transparent'),
+              rowStyle: 'display:grid;grid-template-columns:20px minmax(0,1.05fr) 118px minmax(0,1.15fr) 152px 96px;gap:12px;align-items:center;padding:10px 2px;border-radius:7px;border:1px solid ' + (a ? '#3a3a3a' : '#2c2c2c') + ';background:' + (a ? '#2c2c2c' : '#212121') + ';padding-left:10px;padding-right:10px'
+            };
+          })
+        };
+      }).filter(f => f.count > 0),
+      setView: this.setView, setPace: this.setPace, setSens: this.setSens,
+      toggleUnit: this.toggleUnit, toggleInd: this.toggleInd, dismissInd: this.dismissInd,
+      selectNode: this.selectNode, onThr: this.onThr, revertThr: this.revertThr, seedNode: this.seedNode,
+      onCadN: this.onCadN, onCadU: this.onCadU, toggleCadMenu: this.toggleCadMenu,
+      approveUnit: this.approveUnit, approveAll: this.approveAll, resetPlan: this.resetPlan,
+      onQuery: this.onQuery, clearQuery: this.clearQuery, useExample: this.useExample,
+      pickTarget: this.pickTarget, attachTech: this.attachTech, removeCustom: this.removeCustom, toggleTargetMenu: this.toggleTargetMenu,
+      openSpots: this.openSpots, closeSpots: this.closeSpots, fixSpot: this.fixSpot, signSpot: this.signSpot, unsignSpot: this.unsignSpot,
+      hoverNode: this.hoverNode, start: this.start,
+
+      m: {
+        sens: onCount + s.customs.filter(c => this.on(c.id)).length,
+        sensTot: this.IND.filter(i => s.st[i.id] !== 'off').length + s.customs.length,
+        sensColor: onCount ? '#e3d6cc' : '#d09b96',
+        feedLine: [...new Set(this.IND.filter(i => this.on(i.id)).map(i => i.s).concat(s.customs.filter(c => this.on(c.id)).map(c => c.s)))].length + ' of ' + Object.keys(this.SENS).length + ' indicators feeding them',
+        nodes: nodesOn, nodeColor: nodeColor, nodeTicks: Array.from({ length: 20 }, (_, i) => tick(i, nodesOn, nodeColor)),
+        kills: killOn, killTot: killTot, killColor: killColor, killTicks: Array.from({ length: killTot }, (_, i) => tick(i, killOn, killColor)),
+        spots: open.length, spotColor: spotColor,
+        spotHead: s.live ? 'Blind spots identified' : 'Blind spots if you start now',
+        spotSub: crit ? crit + ' critical' : open.length ? 'none critical' : 'all closed',
+        spotBtn: 'text-align:left;padding:0 0 0 26px;border:0;border-left:1px solid #2c2c2c;background:none'
+      },
+      paces: ['continuous', 'daily', 'weekly'].map(k => ({ key: k, label: paceMap[k], style: this.seg(s.pace === k) })),
+      sensis: ['w', 'b', 's'].map(k => ({ key: k, label: sensMap[k], style: this.seg(s.sens === k) })),
+      viewS: { list: this.segIco(s.view === 'list'), graph: this.segIco(s.view === 'graph'), feeds: this.segIco(s.view === 'feeds') },
+      ctxLine: 'From S4: RSK-05 reads mitigate and fails leave-one-out, so the engine recommends ' + (s.pace === 'daily' ? 'Daily' : 'Daily') + ' + Balanced. Scorecard drivers Rates and Credit set every threshold below.',
+
+      cadDefault: cadDefault, approveCrit: this.approveCrit, toggleStack: this.toggleStack,
+      groups: [...new Set(this.UNITS.map(u => u.cid))].map(cid => {
+        const mine = units.filter(x => x.cid === cid);
+        const ids = this.UNITS.filter(u => u.cid === cid).map(u => u.id);
+        const sugN = this.IND.filter(i => ids.indexOf(i.u) >= 0 && s.st[i.id] === 'sug').length;
+        const onN = this.IND.filter(i => ids.indexOf(i.u) >= 0 && this.on(i.id)).length;
+        const r = this.read(cid);
+        return {
+          cid: cid, name: this.CRIT[cid], units: mine,
+          readPill: this.pill(r.dir === 'exploit' ? 'green' : 'red', true),
+          readLabel: r.dir === 'exploit' ? 'READS EXPLOIT' : 'READS MITIGATE',
+          robPill: this.pill(r.robust ? 'def' : 'yellow', true),
+          robLabel: r.robust ? 'ROBUST' : 'FRAGILE · FAILS LEAVE-ONE-OUT',
+          summary: mine.length + (mine.length === 1 ? ' unit · ' : ' units · ') + onN + ' indicators approved' + (sugN ? ' · ' + sugN + ' awaiting you' : ''),
+          pending: sugN > 0, approveLabel: 'Approve ' + sugN + ' on ' + cid,
+          stackOpen: s.stackFor === cid,
+          stackLabel: s.stackFor === cid ? 'Hide stack' : 'Evidence stack',
+          stackBtn: 'display:flex;align-items:center;gap:6px;flex:none;white-space:nowrap;border-radius:7px;padding:6px 11px;font-size:11.5px;border:1px solid ' + (s.stackFor === cid ? '#9e7468' : '#333') + ';background:' + (s.stackFor === cid ? 'rgba(158,116,104,.16)' : 'none') + ';color:' + (s.stackFor === cid ? '#f6f6f6' : '#9a9a9a'),
+          supW: r.supW, oppW: r.oppW,
+          gapLabel: (r.gap > 0 ? '+' : '') + r.gap,
+          gapColor: r.gap > 0 ? '#93c29b' : r.gap < 0 ? '#d09b96' : '#8d8d8d',
+          noSup: r.sup.length === 0, noOpp: r.opp.length === 0,
+          sup: r.sup.map(u => this.stackRow(u, r.base)), opp: r.opp.map(u => this.stackRow(u, r.base)),
+          looColor: r.robust ? '#93c29b' : '#d9be8a', looText: this.looText(cid, r)
+        };
+      }),
+      pend: {
+        label: pending ? pending + ' engine suggestions awaiting validation' : 'all validated · ' + onCount + ' indicators live',
+        pill: this.pill(pending ? 'yellow' : 'green'),
+        btnLabel: pending ? 'See recommendations' : 'Nothing pending',
+        btnStyle: 'border:0;border-radius:7px;padding:8px 15px;font-size:12px;font-weight:600;' + (pending ? 'background:#9e7468;color:#191919' : 'background:#2c2c2c;color:#7d7d7d')
+      },
+      units: units,
+
+      query: s.query, hasQuery: this.matchList().length > 0, noQuery: !s.query.trim(),
+      matchHead: 'Best matching assessment technique' + (this.matchList().length > 1 ? 's · ' + this.matchList().length + ' of 14 in the library' : ''),
+      promptBorder: s.query.trim() ? '#9e7468' : '#3d3d3d',
+      matches: matches, examples: this.EXAMPLES,
+      hasCustom: s.customs.length > 0,
+      customs: s.customs.map(c => {
+        const a = this.on(c.id), i = { id: c.id, t: c.tech, thr: { w: c.thr, b: c.thr, s: c.thr } };
+        const cad = this.cadOf2(i);
+        const isUnit = this.UNITS.some(u => u.id === c.target);
+        return {
+          id: c.id, name: c.name, target: c.target,
+          targetName: isUnit ? this.UNITS.find(u => u.id === c.target).claim : this.CRIT[c.target],
+          tech: this.T[c.tech], techPill: this.pill('acc'), src: this.SENS[c.s].n,
+          ownPill: this.pill('acc', 500), ownLabel: 'YOURS',
+          thr: this.thrOf(i), edited: s.thrOv[c.id] !== undefined, prop: c.prop,
+          ceilPill: this.pill(c.ceil === 'red' ? 'red' : 'yellow'), ceilLabel: c.ceil === 'red' ? 'RED' : 'YELLOW MAX',
+          check: a ? '✓' : '',
+          cadN: cad.n, cadU: cad.u, cadULabel: cad.u, cadMenu: s.cadMenuFor === c.id,
+          cadNStyle: 'width:46px;flex:none;text-align:center;background:' + (s.cadOv[c.id] ? '#242424' : 'transparent') + ';border:1px solid ' + (s.cadOv[c.id] ? '#9e7468' : '#3a3a3a') + ';border-radius:6px;padding:7px 4px;outline:none;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;color:#c9b7ac',
+          cadUStyle: 'position:relative;display:block;flex:1;min-width:0',
+          cadBtnStyle: 'display:flex;align-items:center;justify-content:space-between;gap:5px;width:100%;padding:7px 8px;border-radius:6px;text-align:left;font-size:11px;color:#c9b7ac;background:' + (s.cadOv[c.id] ? '#242424' : 'transparent') + ';border:1px solid ' + (s.cadMenuFor === c.id || s.cadOv[c.id] ? '#9e7468' : '#3a3a3a'),
+          cadUnits: ['minutes', 'hours', 'days'].map(x => ({
+            key: x, label: x,
+            style: 'display:block;width:100%;text-align:left;border:0;border-radius:4px;padding:6px 8px;font-size:11px;background:' + (cad.u === x ? 'rgba(158,116,104,.22)' : 'transparent') + ';color:' + (cad.u === x ? '#e3d6cc' : '#b4b4b4')
+          })),
+          thrStyle: 'width:100%;background:' + (s.thrOv[c.id] !== undefined ? '#242424' : 'transparent') + ';border:1px solid ' + (s.thrOv[c.id] !== undefined ? '#9e7468' : '#3a3a3a') + ';border-radius:6px;padding:7px 10px;outline:none;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;color:#c9b7ac;line-height:1.4',
+          boxStyle: 'width:18px;height:18px;margin-top:12px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;flex:none;font-weight:700;color:#191919;padding:0;border:1px solid ' + (a ? '#9e7468' : '#555') + ';background:' + (a ? '#9e7468' : 'transparent'),
+          rowStyle: 'display:grid;grid-template-columns:18px minmax(0,252px) minmax(0,1fr) 24px;gap:14px;align-items:start;padding:13px 12px;border-radius:7px;border:1px solid ' + (a ? '#3a3a3a' : '#2c2c2c') + ';background:' + (a ? '#2c2c2c' : '#212121')
+        };
+      }),
+
+      g: this.graph(),
+
+      spotsOpen: s.spotsOpen,
+      spotList: open.map(x => ({
+        id: x.id, tag: x.tag, title: x.title, body: x.body,
+        sevPill: this.pill(x.sev === 'stop' ? 'red' : x.sev === 'watch' ? 'yellow' : 'def'),
+        sevLabel: x.sev === 'stop' ? 'CRITICAL' : x.sev === 'watch' ? 'MATERIAL' : 'LOW',
+        cardStyle: 'background:#222222;border:1px solid ' + (x.sev === 'stop' ? '#a35a55' : x.sev === 'watch' ? '#4a3f2a' : '#2c2c2c') + ';border-radius:8px;padding:15px 17px',
+        hasFix: !!x.fix || !!x.seed, fixLabel: x.fixLabel
+      })),
+      hasSigned: Object.keys(s.signed).length > 0,
+      signedList: this.SPOTDEF.filter(x => s.signed[x.id]).map(x => ({ id: x.id, title: x.title })),
+
+      footerLine: onCount + ' indicators approved · ' + pending + ' pending · ' + sensMap[s.sens] + ' thresholds, ' + paceMap[s.pace].toLowerCase() + ' pace · ' + nodesOn + '/20 nodes, ' + killOn + '/' + killTot + ' kill conditions, ' + open.length + ' blind spots open',
+      startLabel: s.live ? 'Update the plan' : 'Start monitoring'
+    };
+  }
+}
+</script>
+</body>
+</html>
